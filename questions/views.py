@@ -27,7 +27,8 @@ def question():
     b1 = Answer.query.filter(Answer.type1 == "B").count()
     a2 = Answer.query.filter(Answer.type2 == "A").count()
     b2 = Answer.query.filter(Answer.type2 == "B").count()
-    return render_template('question.html', type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
+    header = "アンケートにご協力お願いします"
+    return render_template('question.html', header=header, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
 
 @app.route('/answer', methods=['POST'])
 def answer():
@@ -49,7 +50,8 @@ def answer():
 @app.route('/admin')
 def show():
     answers = Answer.query.all()
-    return render_template('admin.html', answers = answers)
+    header = "管理者ページ"
+    return render_template('admin.html', answers = answers, header=header)
 
 @app.route('/output', methods=['POST'])
 def output():
@@ -64,8 +66,5 @@ def output():
 
 @app.route('/download', methods=['POST'])
 def download():
-    # send_file(app.config['UPLOAD_FOLDER'], "output.csv")
-    # send_file("../output.csv", mimetype="text/csv", as_attachment=False, attachment_filename=None, add_etags=True, cache_timeout=None, conditional=False, last_modified=None)
-    flash('ダウンロードしました')
-    send_from_directory(app.config['UPLOAD_FOLDER'], "output.csv", as_attachment=True)
-    return redirect(url_for('show'))
+    return send_from_directory(app.config['UPLOAD_FOLDER'], "output.csv", as_attachment=True)
+    # return redirect(url_for('show'))
