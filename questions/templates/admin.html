@@ -1,17 +1,36 @@
 {% extends "layout.html" %}
 {% block body %}
-    <form action="{{ url_for('output') }}" method=post>
-        <input type=submit value=csv更新>
-    </form>
-    <form action="{{ url_for('download') }}" method=post>
-        <input type=submit value=csvダウンロード>
-    </form>
-    <table>
-      <tr><th>ID</th><th>Q1</th><th>Q2</th><th>TYPE1</th><th>Q3</th><th>Q4</th><th>TYPE2</th><th>Q5</th><th>Q6</th></tr>
-      {% for answer in answers %}
-      <tr><th>{{ answer.id }}</th><td>{{ answer.q1 }}</td><td>{{ answer.q2 }}</td><td>{{ answer.type1 }}</td><td>{{ answer.q3 }}</td><td>{{ answer.q4 }}</td><td>{{ answer.type2 }}</td><td>{{ answer.q5 }}</td><td>{{ answer.q6 }}</td></tr>
+<form action="{{ url_for('output') }}" method=post>
+    <input type=submit value=csv更新>
+</form>
+<form action="{{ url_for('download') }}" method=post>
+    <input type=submit value=csvダウンロード>
+</form>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        {% for i in range(config['BRANCH_NUMBER']) %}
+        <td>B{{ i }}</td>
+        {% endfor %}
+        {% for i in range(config['QUESTION_NUMBER']) %}
+        <td>Q{{ i }}</td>
+        {% endfor %}
+    </tr>
+
+    {% for answer in answers %}
+    <tr>
+        <th>{{ answer.id }}</th>
+        <th>{{ answer.user_name }}</th>
+        {% for i in range(config['BRANCH_NUMBER']) %}
+        <td>{{ answer.branch[i] }}</td>
+        {% endfor %}
+        {% for i in range(config['QUESTION_NUMBER']) %}
+        <td>{{ answer.question[i] }}</td>
+        {% endfor %}
+    </tr>
     {% else %}
-    <tr><li><em>No Answer</em></tr>
+    <tr>No Answer</tr>
     {% endfor %}
-    </table>
+</table>
 {% endblock %}

@@ -9,8 +9,6 @@ def login_required(f):
     def decorated_view(*args, **kwargs):
         if session.get('user_name') is None:
             return redirect(url_for('top'))
-        elif session.get('user_name') == 'admin':
-            return redirect(url_for('show'))
         return f(*args, **kwargs)
     return decorated_view
 
@@ -32,7 +30,7 @@ def login():
     header = ''
     footer = ''
     uname = request.form['user_name']
-    if db.session.query(Answer.user_name).filter(Answer.user_name==uname).count():
+    if db.session.query(Answer).filter(Answer.user_name==uname).count():
         flash('おかえりなさい' + uname + 'さん')
     else:
         answer = Answer(user_name = uname)
@@ -57,7 +55,7 @@ def logout():
 def question():
     header = ''
     footer = ''
-    user = db.session.query(Answer.user_name).filter(Answer.user_name==session.get('user_name'))
+    user = db.session.query(Answer).filter(Answer.user_name==session.get('user_name'))
     return render_template('question.html', header=header, footer=footer, user=user)
 
 @app.route('/answer', methods=['POST'])
@@ -65,8 +63,10 @@ def question():
 def answer():
     header = ''
     footer = ''
-    answer = Answer(
-            )
+    answer = db.session.query(Answer).filter(Answer.user_name==session.get('user_name')).first()
+    for i in range(app.config['QUESTION_NUMBER']):
+        q_idx = 'q' + str(i)
+        answer.question[i] = request.form['q' + str(i)]
     db.session.add(answer)
     db.session.commit()
     flash('ご回答ありがとうございました！')
@@ -83,11 +83,24 @@ def show():
 @app.route('/output', methods=['POST'])
 @login_required
 def output():
+    # csv書き込みの準備
     f = open('questions/upload/output.csv', 'w')
     writer = csv.writer(f, lineterminator='\n')
-    writer.writerow(['id', 'q1', 'q2', 'type1', 'q3', 'q4', 'type2', 'q5', 'q6'])
+    # csv1行目
+    csv_row_name = ['id', 'user_name']
+    for i in range(app.config['BRANCH_NUMBER']):
+        csv_row_name.append('branch' + str(i))
+    for i in range(app.config['QUESTION_NUMBER']):
+        csv_row_name.append('question' + str(i))
+    writer.writerow(csv_row_name)
+    # csvにデータベースから書き出す
     for answer in Answer.query.all():
-        writer.writerow([answer.id, answer.q1, answer.q2, answer.type1, answer.q3, answer.q4, answer.type2, answer.q5, answer.q6])
+        csv_row = [answer.id, answer.user_name]
+        for i in range(app.config['BRANCH_NUMBER']):
+            csv_row.append(answer.branch[i])
+        for i in range(app.config['QUESTION_NUMBER']):
+            csv_row.append(answer.question[i])
+        writer.writerow(csv_row)
     f.close()
     flash('更新しました')
     return redirect(url_for('show'))

@@ -19,6 +19,9 @@ class Answer(db.Model):
     for i in range(app.config['QUESTION_NUMBER']):
         question[i] = db.Column(db.Text)
 
+def __getitem__(self, key):
+    return getattr(self, key) 
+
 # データベース作成
 def init():
     db.create_all()
