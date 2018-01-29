@@ -1,14 +1,37 @@
-<!doctype html>
-<title>アンケート</title>
-<link rel="stylesheet" type=text/css href="{{ url_for('static', filename='css/bootstrap.css') }}">
-<!-- <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}"> -->
-<div class="jumbotron">
-    <div class="container">
-        <h2>{{ header }}</h2>
-    </div>
-</div>
-<div class="container">
-    {% for message in get_flashed_messages() %}
-        {{ message }}
-    {% endfor %} {% block body %}{% endblock %}
-</div>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>アンケート</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div class="head">
+            <div class="container">
+                <div class="like_jumbotron">
+                    <h2 id="header">{{ header }}</h2>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            {% for message in get_flashed_messages() %}
+                {{ message }}
+            {% endfor %}
+
+            {% block body %}
+            {% endblock %}
+        </div>
+
+        <div class="foot">
+            <div class="container">
+                <div class="right">
+                    <p style="text-align: right;">{{ footer }}</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

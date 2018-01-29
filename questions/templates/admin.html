@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block body %}
-<!-- <div style="padding: 30px;"> -->
     <form action="{{ url_for('output') }}" method=post>
         <input type=submit value=csv更新>
     </form>
@@ -15,5 +14,4 @@
     <tr><li><em>No Answer</em></tr>
     {% endfor %}
     </table>
-<!-- </div> -->
 {% endblock %}

@@ -1,58 +1,69 @@
 {% extends "layout.html" %}
 {% block body %}
   <form action="{{ url_for('answer') }}" method=post class=answer>
-    <dl>
-        <div class="">
-
-        </div>
-      <dt required>どう感じますか
-      <dd><input type=radio name=q1 value=1 required>そう感じる
-      <dd><input type=radio name=q1 value=2 required>そうは感じない
-      <dd><input type=radio name=q1 value=3 required required>どちらでもない
-
-      <dt required>どう感じますか
-      <dd><input type=radio name=q2 value=1 required>そう感じる
-      <dd><input type=radio name=q2 value=2 required>そうは感じない
-      <dd><input type=radio name=q2 value=3 required>どちらでもない
-
-      {% if type1 == "A" %}
-      <dt required>どう感じますか(type1 A)
-      <dd><input type=radio name=q3 value=1 required>そう感じる
-      <dd><input type=radio name=q3 value=2 required>そうは感じない
-      <dd><input type=radio name=q3 value=3 required>どちらでもない
-      <input type="hidden" name="type1" value="A">
-      {% else %}
-      <dt required>どう感じますか(type1 B)
-      <dd><input type=radio name=q3 value=1 required>そう感じる
-      <dd><input type=radio name=q3 value=2 required>そうは感じない
-      <dd><input type=radio name=q3 value=3 required>どちらでもない
-      <input type="hidden" name="type1" value="B">
-      {% endif %}
-
-      <dt required>どう感じますか
-      <dd><input type=radio name=q4 value=1 required>そう感じる
-      <dd><input type=radio name=q4 value=2 required>そうは感じない
-      <dd><input type=radio name=q4 value=3 required>どちらでもない
-      {% if type2 == "A" %}
-      <dt required>どう感じますか(type2 A)
-      <dd><input type=radio name=q5 value=1 required>そう感じる
-      <dd><input type=radio name=q5 value=2 required>そうは感じない
-      <dd><input type=radio name=q5 value=3 required>どちらでもない
-      <input type="hidden" name="type2" value="A">
-      {% else %}
-      <dt required>どう感じますか(type2 B)
-      <dd><input type=radio name=q5 value=1 required>そう感じる
-      <dd><input type=radio name=q5 value=2 required>そうは感じない
-      <dd><input type=radio name=q5 value=3 required>どちらでもない
-      <input type="hidden" name="type2" value="B">
-      {% endif %}
-
-      <dt required>どう感じますか
-      <dd><input type=radio name=q6 value=1 required>そう感じる
-      <dd><input type=radio name=q6 value=2 required>そうは感じない
-      <dd><input type=radio name=q6 value=3 required>どちらでもない
-      <dd><input type=submit value=送信>
-    </dl>
+      <table class="table">
+          <tr>
+              <th></th>
+              <th>そう感じる</th>
+              <th>そうは感じない</th>
+              <th>どちらでもない</th>
+          </tr>
+          <tr>
+              <th>どう感じますか</th>
+              <td><input type=radio name=q1 value=1 required></td>
+              <td><input type=radio name=q1 value=2 required></td>
+              <td><input type=radio name=q1 value=3 required></td>
+          </tr>
+          <tr>
+              <th>どう感じますか</th>
+              <td><input type=radio name=q2 value=1 required></td>
+              <td><input type=radio name=q2 value=2 required></td>
+              <td><input type=radio name=q2 value=3 required></td>
+          </tr>
+          {% if type1 == "A" %}
+          <tr>
+              <th>どう感じますか(type1 A)</th>
+              <td><input type=radio name=q3 value=1 required></td>
+              <td><input type=radio name=q3 value=2 required></td>
+              <td><input type=radio name=q3 value=3 required></td>
+              <input type="hidden" name="type1" value="A">
+          </tr>
+          {% else %}
+              <th>どう感じますか(type1 B)</th>
+              <td><input type=radio name=q3 value=1 required></td>
+              <td><input type=radio name=q3 value=2 required></td>
+              <td><input type=radio name=q3 value=3 required></td>
+              <input type="hidden" name="type1" value="B">
+          {% endif %}
+          <tr>
+              <th>どう感じますか</th>
+              <td><input type=radio name=q4 value=1 required></td>
+              <td><input type=radio name=q4 value=2 required></td>
+              <td><input type=radio name=q4 value=3 required></td>
+          </tr>
+          {% if type2 == "A" %}
+          <tr>
+              <th>どう感じますか(type2 A)</th>
+              <td><input type=radio name=q5 value=1 required></td>
+              <td><input type=radio name=q5 value=2 required></td>
+              <td><input type=radio name=q5 value=3 required></td>
+              <input type="hidden" name="type2" value="A">
+          </tr>
+          {% else %}
+              <th>どう感じますか(type2 B)</th>
+              <td><input type=radio name=q5 value=1 required></td>
+              <td><input type=radio name=q5 value=2 required></td>
+              <td><input type=radio name=q5 value=3 required></td>
+              <input type="hidden" name="type2" value="B">
+          {% endif %}
+          <tr>
+              <th>どう感じますか</th>
+              <td><input type=radio name=q6 value=1 required></td>
+              <td><input type=radio name=q6 value=2 required></td>
+              <td><input type=radio name=q6 value=3 required></td>
+          </tr>
+      </table>
+      <input type=submit value=送信>
   </form>
 {% print(a1) %}
 {% print(b1) %}

@@ -1,5 +1,5 @@
 import random, csv, codecs
-from flask import request, redirect, url_for, render_template, flash, send_from_directory # send_file
+from flask import request, redirect, url_for, render_template, flash, send_from_directory
 from questions import app, db
 from questions.models import Answer
 
@@ -28,7 +28,8 @@ def question():
     a2 = Answer.query.filter(Answer.type2 == "A").count()
     b2 = Answer.query.filter(Answer.type2 == "B").count()
     header = "アンケートにご協力お願いします"
-    return render_template('question.html', header=header, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
+    footer = "アンケート調査"
+    return render_template('question.html', header=header, footer=footer, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
 
 @app.route('/answer', methods=['POST'])
 def answer():
@@ -51,7 +52,8 @@ def answer():
 def show():
     answers = Answer.query.all()
     header = "管理者ページ"
-    return render_template('admin.html', answers = answers, header=header)
+    footer = "アンケート調査"
+    return render_template('admin.html', answers = answers, header=header, footer=footer)
 
 @app.route('/output', methods=['POST'])
 def output():
@@ -66,5 +68,5 @@ def output():
 
 @app.route('/download', methods=['POST'])
 def download():
+    flash('')
     return send_from_directory(app.config['UPLOAD_FOLDER'], "output.csv", as_attachment=True)
-    # return redirect(url_for('show'))
