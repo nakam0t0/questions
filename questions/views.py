@@ -4,31 +4,59 @@ from questions import app, db
 from questions.models import Answer
 
 def arrangeAB(column):
-    a_num = Answer.query.filter(column == "A").count()
-    b_num = Answer.query.filter(column == "B").count()
+    a_num = Answer.query.filter(column == 'A').count()
+    b_num = Answer.query.filter(column == 'B').count()
     if a_num > b_num:
-        return "B"
+        return 'B'
     elif a_num < b_num:
-        return "A"
+        return 'A'
     else:
         r = random.randint(0, 1)
         if r == 0:
-            return "A"
+            return 'A'
         elif r == 1:
-            return "B"
+            return 'B'
         else:
-            print("おかしい")
+            print('おかしい')
 
 @app.route('/')
+def top():
+    return render_template('question.html', header=header, footer=footer, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
+
+@app.route('/signup')
+def signup():
+    type1 = arrangeAB(Answer.type1)
+    type2 = arrangeAB(Answer.type2)
+    a1 = Answer.query.filter(Answer.type1 == 'A').count()
+    b1 = Answer.query.filter(Answer.type1 == 'B').count()
+    a2 = Answer.query.filter(Answer.type2 == 'A').count()
+    b2 = Answer.query.filter(Answer.type2 == 'B').count()
+    header = 'アンケートにご協力お願いします'
+    footer = 'アンケート調査'
+    return render_template('question.html', header=header, footer=footer, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
+
+@app.route('/signin')
+def signin():
+    type1 = arrangeAB(Answer.type1)
+    type2 = arrangeAB(Answer.type2)
+    a1 = Answer.query.filter(Answer.type1 == 'A').count()
+    b1 = Answer.query.filter(Answer.type1 == 'B').count()
+    a2 = Answer.query.filter(Answer.type2 == 'A').count()
+    b2 = Answer.query.filter(Answer.type2 == 'B').count()
+    header = 'アンケートにご協力お願いします'
+    footer = 'アンケート調査'
+    return render_template('question.html', header=header, footer=footer, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
+
+@app.route('/question')
 def question():
     type1 = arrangeAB(Answer.type1)
     type2 = arrangeAB(Answer.type2)
-    a1 = Answer.query.filter(Answer.type1 == "A").count()
-    b1 = Answer.query.filter(Answer.type1 == "B").count()
-    a2 = Answer.query.filter(Answer.type2 == "A").count()
-    b2 = Answer.query.filter(Answer.type2 == "B").count()
-    header = "アンケートにご協力お願いします"
-    footer = "アンケート調査"
+    a1 = Answer.query.filter(Answer.type1 == 'A').count()
+    b1 = Answer.query.filter(Answer.type1 == 'B').count()
+    a2 = Answer.query.filter(Answer.type2 == 'A').count()
+    b2 = Answer.query.filter(Answer.type2 == 'B').count()
+    header = 'アンケートにご協力お願いします'
+    footer = 'アンケート調査'
     return render_template('question.html', header=header, footer=footer, type1=type1, type2=type2, a1=a1, b1=b1, a2=a2, b2=b2)
 
 @app.route('/answer', methods=['POST'])
@@ -51,8 +79,8 @@ def answer():
 @app.route('/admin')
 def show():
     answers = Answer.query.all()
-    header = "管理者ページ"
-    footer = "アンケート調査"
+    header = '管理者ページ'
+    footer = 'アンケート調査'
     return render_template('admin.html', answers = answers, header=header, footer=footer)
 
 @app.route('/output', methods=['POST'])
@@ -69,4 +97,4 @@ def output():
 @app.route('/download', methods=['POST'])
 def download():
     flash('')
-    return send_from_directory(app.config['UPLOAD_FOLDER'], "output.csv", as_attachment=True)
+    return send_from_directory(app.config['UPLOAD_FOLDER'], 'output.csv', as_attachment=True)
