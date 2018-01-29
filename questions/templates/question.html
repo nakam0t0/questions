@@ -1,72 +1,231 @@
 {% extends "layout.html" %}
 {% block body %}
-  <form action="{{ url_for('answer') }}" method=post class=answer>
-      <table class="table">
-          <tr>
-              <th></th>
-              <th>そう感じる</th>
-              <th>そうは感じない</th>
-              <th>どちらでもない</th>
-          </tr>
-          <tr>
-              <th>どう感じますか</th>
-              <td><input type=radio name=q1 value=1 required></td>
-              <td><input type=radio name=q1 value=2 required></td>
-              <td><input type=radio name=q1 value=3 required></td>
-          </tr>
-          <tr>
-              <th>どう感じますか</th>
-              <td><input type=radio name=q2 value=1 required></td>
-              <td><input type=radio name=q2 value=2 required></td>
-              <td><input type=radio name=q2 value=3 required></td>
-          </tr>
-          {% if type1 == "A" %}
-          <tr>
-              <th>どう感じますか(type1 A)</th>
-              <td><input type=radio name=q3 value=1 required></td>
-              <td><input type=radio name=q3 value=2 required></td>
-              <td><input type=radio name=q3 value=3 required></td>
-              <input type="hidden" name="type1" value="A">
-          </tr>
-          {% else %}
-              <th>どう感じますか(type1 B)</th>
-              <td><input type=radio name=q3 value=1 required></td>
-              <td><input type=radio name=q3 value=2 required></td>
-              <td><input type=radio name=q3 value=3 required></td>
-              <input type="hidden" name="type1" value="B">
-          {% endif %}
-          <tr>
-              <th>どう感じますか</th>
-              <td><input type=radio name=q4 value=1 required></td>
-              <td><input type=radio name=q4 value=2 required></td>
-              <td><input type=radio name=q4 value=3 required></td>
-          </tr>
-          {% if type2 == "A" %}
-          <tr>
-              <th>どう感じますか(type2 A)</th>
-              <td><input type=radio name=q5 value=1 required></td>
-              <td><input type=radio name=q5 value=2 required></td>
-              <td><input type=radio name=q5 value=3 required></td>
-              <input type="hidden" name="type2" value="A">
-          </tr>
-          {% else %}
-              <th>どう感じますか(type2 B)</th>
-              <td><input type=radio name=q5 value=1 required></td>
-              <td><input type=radio name=q5 value=2 required></td>
-              <td><input type=radio name=q5 value=3 required></td>
-              <input type="hidden" name="type2" value="B">
-          {% endif %}
-          <tr>
-              <th>どう感じますか</th>
-              <td><input type=radio name=q6 value=1 required></td>
-              <td><input type=radio name=q6 value=2 required></td>
-              <td><input type=radio name=q6 value=3 required></td>
-          </tr>
-      </table>
-      <input type=submit value=送信>
-  </form>
-{% print(a1) %}
-{% print(b1) %}
-{% print(a2) %}
-{% print(b2) %}
+<form action={{ url_for('answer') }} method=post class=answer>
+    <p>あなたの性別を教えてください。</p>
+    <input type=radio name=q0 value=1 required>男性
+    <input type=radio name=q0 value=2 required>女性
+
+    <p>あなたの年齢を教えてください。</p>
+    <input type=radio name=q1 value=1 required>20〜29歳
+    <input type=radio name=q1 value=2 required>30〜39歳
+    <input type=radio name=q1 value=3 required>40〜49歳
+    <input type=radio name=q1 value=4 required>50〜59歳
+    <input type=radio name=q1 value=5 required>60〜69歳
+    <input type=radio name=q1 value=6 required>70歳以上
+
+
+    <p>政治の立場を明らかにするにあたって、世間ではよく「保守」とか「リベラル」とかいいますが、以下の4つのうち、あなたはどれにあてはまりますか。</p>
+    <input type=radio name=q2 value=1 required>保守
+    <input type=radio name=q2 value=2 required>やや保守
+    <input type=radio name=q2 value=3 required>リベラル
+    <input type=radio name=q2 value=4 required>ややリベラル
+
+    <p>以下の質問について、あなたの考えに最も近いものを一つずつお答えください</p>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>まったくあてはまらない</th>
+            <th>ややあてはまらない</th>
+            <th>どちらでもない</th>
+            <th>ややあてはまる</th>
+            <th>とてもあてはまる</th>
+        </tr>
+        <tr>
+            <th>現在の国の政治の動向について関心が高い</th>
+            <td><input type=radio name=q3 value=1 required></td>
+            <td><input type=radio name=q3 value=2 required></td>
+            <td><input type=radio name=q3 value=3 required></td>
+            <td><input type=radio name=q3 value=4 required></td>
+            <td><input type=radio name=q3 value=5 required></td>
+        </tr>
+        <tr>
+            <th>できるだけテレビやラジオの政治ニュースを見たり聞いたりするよう心がけている</th>
+            <td><input type=radio name=q4 value=1 required></td>
+            <td><input type=radio name=q4 value=2 required></td>
+            <td><input type=radio name=q4 value=3 required></td>
+            <td><input type=radio name=q4 value=4 required></td>
+            <td><input type=radio name=q4 value=5 required></td>
+        </tr>
+        <tr>
+            <th>政治的な問題には関わりを持たないようにしている</th>
+            <td><input type=radio name=q5 value=1 required></td>
+            <td><input type=radio name=q5 value=2 required></td>
+            <td><input type=radio name=q5 value=3 required></td>
+            <td><input type=radio name=q5 value=4 required></td>
+            <td><input type=radio name=q5 value=5 required></td>
+        </tr>
+    </table>
+
+    <p>以下の記事は、神奈川新聞の記事「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」の一部です。この記事はインターネット上で配信され、配信先のニュース掲示板で閲覧者のコメントを読むこともできました．これをふまえて、まず下記の記事をよく読んでください．</span><br><br>「川崎市の福田紀彦市長は６日の定例会見で、ヘイトスピーチ規制を含め人権を幅広く擁護する条例を制定する考えを改めて表明した。市はヘイトスピーチが行われる恐れがある場合、公的施設の利用を事前規制するガイドラインを今秋に策定することを決めており、「ガイドラインの次は条例という考えで研究を進めている」と述べた。<br>　在日コリアンの集住地区である川崎区桜本をはじめ同区内で１３回のヘイトデモが繰り返されてきた市は、市人権施策推進協議会の提言を受けて２月から調査研究に着手。同市長は「条例や法律を作らなければいけないこと自体悲しいことだが、被害者がいて実害が出ている。必要最小限で規制していく考えは当初から変わっていない」と話した。<br>　規制を巡っては、ヘイトスピーチは憲法が保障する表現の自由を逸脱した人権侵害と断じ、桜本でのデモを禁じた昨年６月の横浜地裁川崎支部の仮処分を踏まえ、「司法判断を尊重する。国の考えやヘイトスピーチ解消法が示す通り、ヘイトスピーチは許されないというのが大前提。そこに議論の余地はない」と明言した。」（カナロコ｜神奈川新聞ニュース､http://www.kanaloco.jp/article/256100 2017.6.07公開）</p>
+
+
+    <p>以下の画面は、先ほどの「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」に対するニュース掲示板のコメントの一部となります。<span style="color: #ff0000;">まず、この掲示板のコメントを一つずつ読んでください。あわせてコメントの右下にある「いいね」、「よくないね」の評価数も確認してください。</span>その上で次の質問に進んでください。<br></p>
+
+    {% if user['branch'[0]] == "A" %}
+        <img src="/static/images/ImageA.png">
+    {% else %}
+        <img src="/static/images/ImageB.png">
+    {% endif %}
+
+    <p>このニュース掲示板の各コメントに対して、もしあなたがリアクションをするとしたら、どんなリアクションをしますか。<span style="color: #ff0000;">掲示板の画面に戻ってコメント内容を一つずつ確認しながらお答えください。</span></p>
+        <table>
+            <tr>
+                <th></th>
+                <td>いいね</td>
+                <td>よくないね</td>
+            </tr>
+            <tr>
+                <th>ユーザー1のコメント</th>
+                <td><input type=radio name=q6 value=1 required></td>
+                <td><input type=radio name=q6 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー2のコメント</th>
+                <td><input type=radio name=q7 value=1 required></td>
+                <td><input type=radio name=q7 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー3のコメント</th>
+                <td><input type=radio name=q8 value=1 required></td>
+                <td><input type=radio name=q8 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー4のコメント</th>
+                <td><input type=radio name=q9 value=1 required></td>
+                <td><input type=radio name=q9 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー5のコメント</th>
+                <td><input type=radio name=q10 value=1 required></td>
+                <td><input type=radio name=q10 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー6のコメント</th>
+                <td><input type=radio name=q11 value=1 required></td>
+                <td><input type=radio name=q11 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー7のコメント</th>
+                <td><input type=radio name=q12 value=1 required></td>
+                <td><input type=radio name=q12 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー8のコメント</th>
+                <td><input type=radio name=q13 value=1 required></td>
+                <td><input type=radio name=q13 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー9のコメント</th>
+                <td><input type=radio name=q14 value=1 required></td>
+                <td><input type=radio name=q14 value=2 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー10のコメント</th>
+                <td><input type=radio name=q15 value=1 required></td>
+                <td><input type=radio name=q15 value=2 required></td>
+            </tr>
+    </table>
+
+    <p>このニュース掲示板には、特定のユーザーのコメントを優先的に表示できる/一切表示させなくする機能があります。それぞれのユーザに対してあなたはどのような選択をしますか。<span style="color: #ff0000;">掲示板の画面に戻ってコメント内容を一つずつ確認しながらお答えください。</span></p>
+        <table>
+            <tr>
+                <th></th>
+                <td>このユーザのコメントを優先表示させる</td>
+                <td>このユーザのコメントを一切表示させない</td>
+                <td>そのまま</td>
+            </tr>
+            <tr>
+                <th>ユーザー1</th>
+                <td><input type=radio name=q16 value=1 required></td>
+                <td><input type=radio name=q16 value=2 required></td>
+                <td><input type=radio name=q16 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー2</th>
+                <td><input type=radio name=q17 value=1 required></td>
+                <td><input type=radio name=q17 value=2 required></td>
+                <td><input type=radio name=q17 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー3</th>
+                <td><input type=radio name=q18 value=1 required></td>
+                <td><input type=radio name=q18 value=2 required></td>
+                <td><input type=radio name=q18 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー4</th>
+                <td><input type=radio name=q19 value=1 required></td>
+                <td><input type=radio name=q19 value=2 required></td>
+                <td><input type=radio name=q19 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー5</th>
+                <td><input type=radio name=q20 value=1 required></td>
+                <td><input type=radio name=q20 value=2 required></td>
+                <td><input type=radio name=q20 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー6</th>
+                <td><input type=radio name=q21 value=1 required></td>
+                <td><input type=radio name=q21 value=2 required></td>
+                <td><input type=radio name=q21 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー7</th>
+                <td><input type=radio name=q22 value=1 required></td>
+                <td><input type=radio name=q22 value=2 required></td>
+                <td><input type=radio name=q22 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー8</th>
+                <td><input type=radio name=q23 value=1 required></td>
+                <td><input type=radio name=q23 value=2 required></td>
+                <td><input type=radio name=q23 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー9</th>
+                <td><input type=radio name=q24 value=1 required></td>
+                <td><input type=radio name=q24 value=2 required></td>
+                <td><input type=radio name=q24 value=3 required></td>
+            </tr>
+            <tr>
+                <th>ユーザー10</th>
+                <td><input type=radio name=q25 value=1 required></td>
+                <td><input type=radio name=q25 value=2 required></td>
+                <td><input type=radio name=q25 value=3 required></td>
+            </tr>
+    </table>
+
+    <p>もしあなたがこのニュース掲示板にコメントするとしたら、どのような内容を書き込みますか。</p>
+    <input type="text" name=q26>
+
+    <p>あなたの仕事は、大きく分けて、この中のどれにあたりますか。</p>
+    <input type=radio name=q26 value=1 required>経営者・役員
+    <input type=radio name=q26 value=2 required>正社員
+    <input type=radio name=q26 value=3 required>非正規社員（契約・派遣・嘱託・パート・アルバイトなど）
+    <input type=radio name=q26 value=4 required>自営業者（農林水産業者含む）
+    <input type=radio name=q26 value=5 required>学生・無職（主婦含む）
+
+    <p>あなたが、最後にいらっしゃった学校は、つぎのどれに当たりますか。<br>（在学中の方はその学校をお答えください。）</p>
+    <input type=radio name=q27 value=1 required>中学校
+    <input type=radio name=q27 value=2 required>高等学校
+    <input type=radio name=q27 value=3 required>専門学校
+    <input type=radio name=q27 value=4 required>短期大学・高等専門学校
+    <input type=radio name=q27 value=5 required>大学
+    <input type=radio name=q27 value=6 required>大学院
+
+    <p>かりに現在の日本の社会全体を、このリストにかいてあるように1から10までの10の層に分けるとすれば、あなた自身は、このどれに入ると思いますか。（「1」がもっとも上、「10」がもっとも下）</p>
+    <input type=radio name=q28 value=1 required>1
+    <input type=radio name=q28 value=2 required>2
+    <input type=radio name=q28 value=3 required>3
+    <input type=radio name=q28 value=4 required>4
+    <input type=radio name=q28 value=5 required>5
+    <input type=radio name=q28 value=6 required>6
+    <input type=radio name=q28 value=7 required>7
+    <input type=radio name=q28 value=8 required>8
+    <input type=radio name=q28 value=9 required>9
+    <input type=radio name=q28 value=10 required>10
+
+    <input type=submit value=送信>
+</form>
 {% endblock %}

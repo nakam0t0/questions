@@ -1,4 +1,4 @@
-from questionuestions import app, db
+from questions import app, db
 
 # データベースに関する定義
 
@@ -9,13 +9,15 @@ from questionuestions import app, db
 # questionには回答（整数）を保存 
 # branchはquestionと連動していない
 class Answer(db.Model):
-        __tablename__ = 'answers'
-        id = db.Column(db.Integer, primary_key=True)
-        user_name = db.Column(db.Text)
-        for i in range(app.config['BRANCH_NUMBER']):
-            branch[i] = db.Column(db.Text)
-        for i in range(app.config['QUESTION_NUMBER']):
-            question[i] = db.Column(db.Integer)
+    branch = {} 
+    question = {}
+    __tablename__ = 'answers'
+    id = db.Column(db.Integer, primary_key=True)
+    user_name = db.Column(db.Text)
+    for i in range(app.config['BRANCH_NUMBER']):
+        branch[i] = db.Column(db.Text)
+    for i in range(app.config['QUESTION_NUMBER']):
+        question[i] = db.Column(db.Text)
 
 # データベース作成
 def init():
