@@ -13,8 +13,7 @@ def login_required(f):
     return decorated_view
 
 def branchAB():
-    r = random.randint(0, 1)
-    if r == 0:
+    if random.randint(0, 1) == 0:
         return 'A'
     else:
         return 'B'
@@ -35,10 +34,11 @@ def login():
     else:
         answer = Answer(user_name = uname)
         for i in range(app.config['BRANCH_NUMBER']):
-            answer.branch[i] = branchAB()
+            exec('answer.branch%d = branchAB()' % (i))
         db.session.add(answer)
         db.session.commit()
         flash('こんにちは' + uname + 'さん')
+    session.pop('user_name', None)
     session['user_name'] = uname
     return redirect(url_for('question'))
 
@@ -55,7 +55,8 @@ def logout():
 def question():
     header = ''
     footer = ''
-    user = db.session.query(Answer).filter(Answer.user_name==session.get('user_name'))
+    uname = session.get('user_name')
+    user = db.session.query(Answer).filter(Answer.user_name==uname).first()
     return render_template('question.html', header=header, footer=footer, user=user)
 
 @app.route('/answer', methods=['POST'])
@@ -65,8 +66,7 @@ def answer():
     footer = ''
     answer = db.session.query(Answer).filter(Answer.user_name==session.get('user_name')).first()
     for i in range(app.config['QUESTION_NUMBER']):
-        q_idx = 'q' + str(i)
-        answer.question[i] = request.form['q' + str(i)]
+        exec('answer.question%d = request.form[\'q\' + str(i)] ' % (i))
     db.session.add(answer)
     db.session.commit()
     flash('ご回答ありがとうございました！')
@@ -76,6 +76,7 @@ def answer():
 @login_required
 def show():
     answers = Answer.query.all()
+    data = {}
     header = '管理者ページ'
     footer = 'アンケート調査'
     return render_template('admin.html', answers = answers, header=header, footer=footer)
@@ -97,9 +98,9 @@ def output():
     for answer in Answer.query.all():
         csv_row = [answer.id, answer.user_name]
         for i in range(app.config['BRANCH_NUMBER']):
-            csv_row.append(answer.branch[i])
+            exec('csv_row.append(answer.branch%d)' % (i))
         for i in range(app.config['QUESTION_NUMBER']):
-            csv_row.append(answer.question[i])
+            exec('csv_row.append(answer.question%d)' % (i))
         writer.writerow(csv_row)
     f.close()
     flash('更新しました')

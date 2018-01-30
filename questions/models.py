@@ -9,18 +9,13 @@ from questions import app, db
 # questionには回答（整数）を保存 
 # branchはquestionと連動していない
 class Answer(db.Model):
-    branch = {} 
-    question = {}
     __tablename__ = 'answers'
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.Text)
     for i in range(app.config['BRANCH_NUMBER']):
-        branch[i] = db.Column(db.Text)
+        exec('branch%d = db.Column(db.Text)' % (i))
     for i in range(app.config['QUESTION_NUMBER']):
-        question[i] = db.Column(db.Text)
-
-def __getitem__(self, key):
-    return getattr(self, key) 
+        exec('question%d = db.Column(db.Text)' % (i))
 
 # データベース作成
 def init():

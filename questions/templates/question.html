@@ -61,9 +61,11 @@
 
     <p>以下の画面は、先ほどの「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」に対するニュース掲示板のコメントの一部となります。<span style="color: #ff0000;">まず、この掲示板のコメントを一つずつ読んでください。あわせてコメントの右下にある「いいね」、「よくないね」の評価数も確認してください。</span>その上で次の質問に進んでください。<br></p>
 
-    {% if user['branch'[0]] == "A" %}
+    {% if user.branch0 == 'A' %}
+    A
         <img src="/static/images/ImageA.png">
     {% else %}
+    B
         <img src="/static/images/ImageB.png">
     {% endif %}
 
@@ -200,31 +202,31 @@
     <input type="text" name=q26>
 
     <p>あなたの仕事は、大きく分けて、この中のどれにあたりますか。</p>
-    <input type=radio name=q26 value="1" required>経営者・役員
-    <input type=radio name=q26 value="2" required>正社員
-    <input type=radio name=q26 value="3" required>非正規社員（契約・派遣・嘱託・パート・アルバイトなど）
-    <input type=radio name=q26 value="4" required>自営業者（農林水産業者含む）
-    <input type=radio name=q26 value="5" required>学生・無職（主婦含む）
+    <input type=radio name=q27 value="1" required>経営者・役員
+    <input type=radio name=q27 value="2" required>正社員
+    <input type=radio name=q27 value="3" required>非正規社員（契約・派遣・嘱託・パート・アルバイトなど）
+    <input type=radio name=q27 value="4" required>自営業者（農林水産業者含む）
+    <input type=radio name=q27 value="5" required>学生・無職（主婦含む）
 
     <p>あなたが、最後にいらっしゃった学校は、つぎのどれに当たりますか。<br>（在学中の方はその学校をお答えください。）</p>
-    <input type=radio name=q27 value="1" required>中学校
-    <input type=radio name=q27 value="2" required>高等学校
-    <input type=radio name=q27 value="3" required>専門学校
-    <input type=radio name=q27 value="4" required>短期大学・高等専門学校
-    <input type=radio name=q27 value="5" required>大学
-    <input type=radio name=q27 value="6" required>大学院
+    <input type=radio name=q28 value="1" required>中学校
+    <input type=radio name=q28 value="2" required>高等学校
+    <input type=radio name=q28 value="3" required>専門学校
+    <input type=radio name=q28 value="4" required>短期大学・高等専門学校
+    <input type=radio name=q28 value="5" required>大学
+    <input type=radio name=q28 value="6" required>大学院
 
     <p>かりに現在の日本の社会全体を、このリストにかいてあるように1から10までの10の層に分けるとすれば、あなた自身は、このどれに入ると思いますか。（「1」がもっとも上、「10」がもっとも下）</p>
-    <input type=radio name=q28 value="1" required>1
-    <input type=radio name=q28 value="2" required>2
-    <input type=radio name=q28 value="3" required>3
-    <input type=radio name=q28 value="4" required>4
-    <input type=radio name=q28 value="5" required>5
-    <input type=radio name=q28 value="6" required>6
-    <input type=radio name=q28 value="7" required>7
-    <input type=radio name=q28 value="8" required>8
-    <input type=radio name=q28 value="9" required>9
-    <input type=radio name=q28 value="10" required>10
+    <input type=radio name=q29 value="1" required>1
+    <input type=radio name=q29 value="2" required>2
+    <input type=radio name=q29 value="3" required>3
+    <input type=radio name=q29 value="4" required>4
+    <input type=radio name=q29 value="5" required>5
+    <input type=radio name=q29 value="6" required>6
+    <input type=radio name=q29 value="7" required>7
+    <input type=radio name=q29 value="8" required>8
+    <input type=radio name=q29 value="9" required>9
+    <input type=radio name=q29 value="10" required>10
 
     <input type=submit value=送信>
 </form>
