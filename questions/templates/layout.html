@@ -8,29 +8,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div class="head">
-            <div class="container">
-                <div class="like_jumbotron">
-                    <h2 id="header">{{ header }}</h2>
+        <div id="content">
+            <div class="jumbotron">
+                <div class="container">
+                    <h2>{{ header }}</h2>
                 </div>
+            </div>
+
+            <div class="container">
+                {% for message in get_flashed_messages() %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+
+                {% block body %}
+                {% endblock %}
             </div>
         </div>
 
-
-        <div class="container">
-            {% for message in get_flashed_messages() %}
-                {{ message }}
-            {% endfor %}
-
-            {% block body %}
-            {% endblock %}
-        </div>
-
-        <div class="foot">
-            <div class="container">
-                <div class="right">
-                    <p style="text-align: right;">{{ footer }}</p>
-                </div>
+        <div id="footer">
+            <div class="container right">
+                <p>{{ footer }}</p>
             </div>
         </div>
     </body>

@@ -20,14 +20,12 @@ def branchAB():
 
 @app.route('/')
 def top():
-    header = ''
+    header = 'インターネット掲示板についてのアンケート調査'
     footer = ''
     return render_template('top.html', header=header, footer=footer)
 
 @app.route('/login', methods=['POST'])
 def login():
-    header = ''
-    footer = ''
     uname = request.form['user_name']
     if db.session.query(Answer).filter(Answer.user_name==uname).count():
         flash('おかえりなさい' + uname + 'さん')
@@ -44,16 +42,14 @@ def login():
 
 @app.route('/logout')
 def logout():
-    header = ''
-    footer = ''
     session.pop('user_name', None)
     flash('ログアウトしました')
-    return render_template('top.html')
+    return redirect(url_for('top'))
 
 @app.route('/question')
 @login_required
 def question():
-    header = ''
+    header = 'インターネット掲示板についてのアンケート調査'
     footer = ''
     uname = session.get('user_name')
     user = db.session.query(Answer).filter(Answer.user_name==uname).first()
@@ -62,8 +58,6 @@ def question():
 @app.route('/answer', methods=['POST'])
 @login_required
 def answer():
-    header = ''
-    footer = ''
     answer = db.session.query(Answer).filter(Answer.user_name==session.get('user_name')).first()
     for i in range(app.config['QUESTION_NUMBER']):
         exec('answer.question%d = request.form[\'q\' + str(i)] ' % (i))
@@ -77,8 +71,8 @@ def answer():
 def show():
     answers = Answer.query.all()
     data = {}
-    header = '管理者ページ'
-    footer = 'アンケート調査'
+    header = '管理画面 - インターネット掲示板についてのアンケート調査'
+    footer = ''
     return render_template('admin.html', answers = answers, header=header, footer=footer)
 
 @app.route('/output', methods=['POST'])

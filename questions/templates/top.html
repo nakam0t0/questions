@@ -1,7 +1,24 @@
 {% extends "layout.html" %}
 {% block body %}
-    <form action="{{ url_for('login') }}" method="post">
-        <input type="text" name="user_name" required>
-        <input type="submit" value="login">
-    </form>
+<h4>
+    あなたのクラウドワークスのアカウントidを下記にご記入ください。
+</h4>
+<p>
+アカウントidの情報は調査協力報酬のお支払いのためにだけ用いられます。報酬支払後、直ちにカウント情報は破棄いたします。あなたの回答とアカウントidが結びつけられることはございません。また、アカウントidからあなたの個人情報を知ることは一切できません。<br><br>以上、ご理解いただいた上でアカウントidの提供をよろしくお願いいたします。
+</p>
+<br>
+<br>
+<div class="row">
+    <div class="col-10 offset-1 col-lg-10 offset-lg-1">
+        <form action="{{ url_for('login') }}" method="post">
+            <div class="input-group">
+                <span class="input-group-addon">ID</span>
+                <input type="text" class="form-control" name="user_name" required>
+                <span class="input-group-btn">
+                    <button type="submit" class="btn page-link text-dark d-inline-block">Login</button>
+                </span>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
