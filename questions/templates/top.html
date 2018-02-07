@@ -11,12 +11,11 @@
 <div class="row">
     <div class="col-10 offset-1 col-lg-10 offset-lg-1">
         <form action="{{ url_for('login') }}" method="post">
-            <div class="input-group">
-                <span class="input-group-addon">ID</span>
-                <input type="text" class="form-control" name="user_name" required>
-                <span class="input-group-btn">
-                    <button type="submit" class="btn page-link text-dark d-inline-block">Login</button>
-                </span>
+            <div class="input-group mb-3">
+                <input type="text" name="user_name" class="form-control" placeholder="ユーザー名" aria-label="ユーザー名" aria-describedby="basic-addon1" required>
+                <div class="input-group-append">
+                    <button type="submit" id="button-addon1" class="btn btn-success">ログイン</button>
+                </div>
             </div>
         </form>
     </div>

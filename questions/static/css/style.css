@@ -5,15 +5,19 @@ body {
     height: 100%;
     min-height: 100%;
 }
+
+img {
+    width: 100%;
+}
 .scroll {
     width: 100%;
     overflow: scroll;
 }
 
-
 #content {
     min-height: calc(100vh - 60px);
 }
+
 #footer {
     background-color: #42a9a8 !important;
     color: #FFF!important;
@@ -26,16 +30,20 @@ body {
      color: #FFF!important;
 
 }
+
 .badge-custom {
      background-color: #42a9a8 !important;
      color: #FFF!important;
 }
+
 .question {
     text-indent: -3em;
 }
+
 .right {
      text-align: right;
 }
+
 .left {
      text-align: left;
 }
