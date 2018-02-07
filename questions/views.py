@@ -12,6 +12,14 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_view
 
+def auth_required(f):
+    @wraps(f)
+    def decorated_view(*args, **kwargs):
+        if session.get('user_name') != 'administrator':
+            return redirect(url_for('top'))
+        return f(*args, **kwargs)
+    return decorated_view
+
 def branchAB():
     if random.randint(0, 1) == 0:
         return 'A'
@@ -67,7 +75,7 @@ def answer():
     return redirect(url_for('top'))
 
 @app.route('/admin')
-@login_required
+@auth_required
 def show():
     answers = Answer.query.all()
     data = {}
@@ -76,7 +84,7 @@ def show():
     return render_template('admin.html', answers = answers, header=header, footer=footer)
 
 @app.route('/output', methods=['POST'])
-@login_required
+@auth_required
 def output():
     # csv書き込みの準備
     f = open('questions/upload/output.csv', 'w')
@@ -101,7 +109,7 @@ def output():
     return redirect(url_for('show'))
 
 @app.route('/download', methods=['POST'])
-@login_required
+@auth_required
 def download():
     flash('')
     return send_from_directory(app.config['UPLOAD_FOLDER'], 'output.csv', as_attachment=True)
