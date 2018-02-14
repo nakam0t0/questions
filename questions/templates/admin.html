@@ -1,29 +1,65 @@
 {% extends "layout.html" %}
 {% block body %}
 <div class="row">
-    <div class="col-lg-4 offset-lg-1">
+    <div class="col-lg-6">
         <form action="{{ url_for('output') }}" method=post>
-            <input type=submit class="btn btn-outline-success btn-block" value=csv更新>
+            <input type=submit class="btn btn-success btn-block" value=csv更新>
         </form>
     </div>
-    <div class="col-lg-4 offset-lg-2">
+    <div class="col-lg-6">
         <form action="{{ url_for('download') }}" method=post>
-            <input type=submit class="btn btn-outline-success btn-block" value=csvダウンロード>
+            <input type=submit class="btn btn-success btn-block" value=csvダウンロード>
         </form>
     </div>
-</div>
+    <br>
+    <br>
+    <div class="col-lg-6">
+        <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">
+            パスワード変更
+        </button>
+    </div>
+    <div class="col-lg-6">
+        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#myModal">
+            DB・パスワード初期化
+        </button>
+    </div>
 <br>
-<h1>回答</h1>
+</div>
+<!-- モーダルの設定 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">本当によろしいですか</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>この操作は取り消すことができません</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+        <form action="{{ url_for('destroy') }}" method=post>
+            <input type="hidden" name="_method" value="DELETE" />
+            <input type=submit class="btn btn-danger btn-block" value=DB削除>
+        </form>
+      </div><!-- /.modal-footer -->
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<br>
 <div class="scroll">
     <table class="table">
         <tr>
             <th>ID</th>
             <th>NAME</th>
             {% for i in range(config['BRANCH_NUMBER']) %}
-            <td>B{{ i }}</td>
+            <td>BRANCH{{ i }}</td>
             {% endfor %}
             {% for i in range(config['QUESTION_NUMBER']) %}
-            <td>Q{{ i }}</td>
+            <td>QUESTION{{ i }}</td>
             {% endfor %}
         </tr>
 

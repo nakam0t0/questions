@@ -113,3 +113,19 @@ def output():
 def download():
     flash('')
     return send_from_directory(app.config['UPLOAD_FOLDER'], 'output.csv', as_attachment=True)
+
+
+# データベース初期化
+@app.route('/destroy', methods=['POST'])
+@auth_required
+def destroy():
+    if request.form.get('_method') == 'DELETE':
+        db.drop_all()
+        db.create_all()
+        user = User(name='administrator', _password='administrator')
+        db.session.add(user)
+        db.session.commit()
+        flash('新規作成しました')
+    else:
+        flash('')
+    return redirect(url_for('show'))
