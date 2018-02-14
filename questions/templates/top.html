@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+<h4>
+    あなたのクラウドワークスのアカウントidを下記にご記入ください。
+</h4>
+<p>
+アカウントidの情報は調査協力報酬のお支払いのためにだけ用いられます。報酬支払後、直ちにカウント情報は破棄いたします。あなたの回答とアカウントidが結びつけられることはございません。また、アカウントidからあなたの個人情報を知ることは一切できません。<br><br>以上、ご理解いただいた上でアカウントidの提供をよろしくお願いいたします。
+</p>
+<br>
+<br>
+<div class="row">
+    <div class="col-10 offset-1 col-lg-10 offset-lg-1">
+        <form action="{{ url_for('login') }}" method="post">
+            <div class="input-group mb-3">
+                <input type="text" name="user_name" class="form-control" placeholder="ユーザー名" aria-label="ユーザー名" aria-describedby="basic-addon1" required>
+                <div class="input-group-append">
+                    <button type="submit" id="button-addon1" class="btn btn-success">ログイン</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
