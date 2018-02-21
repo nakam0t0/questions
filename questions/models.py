@@ -22,22 +22,12 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
-    _password = db.Column('password', db.Text)
+    password = db.Column('password', db.Text)
 
-    @classmethod
-    def authenticate(cls, query, email, password):
-        user = query(cls).filter(cls.email==email).first()
-        if user is None:
-            return None, False
-        return user, user.check_password(password)
-
-# データベース作成
+# データベース初期化
 def init():
+    db.drop_all()
     db.create_all()
     user = User(name='administrator', password='administrator')
     db.session.add(user)
     db.session.commit()
-
-# データベース削除
-def destroy():
-    db.drop_all()

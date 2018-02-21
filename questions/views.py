@@ -2,23 +2,23 @@ import random, csv, codecs
 from functools import wraps
 from flask import request, redirect, url_for, render_template, flash, send_from_directory, session
 from questions import app, db
-from questions.models import Answer
+from questions.models import Answer, User
 
 def login_required(f):
     @wraps(f)
-    def decorated_view(*args, **kwargs):
+    def login_wrap(*args, **kwargs):
         if session.get('user_name') is None:
             return redirect(url_for('top'))
         return f(*args, **kwargs)
-    return decorated_view
+    return login_wrap
 
 def auth_required(f):
     @wraps(f)
-    def decorated_view(*args, **kwargs):
-        if session.get('user_name') != 'administrator':
-            return redirect(url_for('top'))
+    def auth_wrap(*args, **kwargs):
+        if session.get('administrator') is None:
+            return redirect(url_for('auth'))
         return f(*args, **kwargs)
-    return decorated_view
+    return auth_wrap
 
 def branchAB():
     if random.randint(0, 1) == 0:
@@ -50,8 +50,11 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.pop('user_name', None)
     flash('ログアウトしました')
+    if session.get('administrator'):
+        session.pop('administrator', None)
+        return redirect(url_for('auth'))
+    session.pop('user_name', None)
     return redirect(url_for('top'))
 
 @app.route('/question')
@@ -74,11 +77,38 @@ def answer():
     flash('ご回答ありがとうございました！')
     return redirect(url_for('top'))
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@app.route('/auth', methods=['GET', 'POST'])
+def auth():
+    header = '管理画面 - インターネット掲示板についてのアンケート調査'
+    footer = ''
+    administrator = db.session.query(User).first()
+    if request.method == 'POST':
+        if administrator.name == request.form['name'] and administrator.password == request.form['password']:
+            session['administrator'] = True
+            return redirect(url_for('show'))
+        else:
+            flash('管理者名またはパスワードが間違っています')
+    return render_template('auth.html', header=header, footer=footer)
+
 @app.route('/admin')
 @auth_required
 def show():
     answers = Answer.query.all()
-    data = {}
     header = '管理画面 - インターネット掲示板についてのアンケート調査'
     footer = ''
     return render_template('admin.html', answers = answers, header=header, footer=footer)
@@ -114,6 +144,24 @@ def download():
     flash('')
     return send_from_directory(app.config['UPLOAD_FOLDER'], 'output.csv', as_attachment=True)
 
+@app.route('/change', methods=['POST'])
+@auth_required
+def change():
+    if request.form.get('_method') == 'PUT':
+        administrator = db.session.query(User).first()
+        if administrator.password == request.form['old']:
+            if request.form['new'] == request.form['confirm']:
+                administrator.password = request.form['new'] 
+                db.session.add(administrator)
+                db.session.commit()
+                flash('パスワードを変更しました')
+                return redirect(url_for('show'))
+            else:
+                flash('新しいパスワードが確認用入力欄と一致しませんでした')
+                return redirect(url_for('show'))
+        else:
+            flash('元のパスワードが正しくありませんでした、ログインからやり直してください')
+    return redirect(url_for('auth'))
 
 # データベース初期化
 @app.route('/destroy', methods=['POST'])
@@ -122,10 +170,10 @@ def destroy():
     if request.form.get('_method') == 'DELETE':
         db.drop_all()
         db.create_all()
-        user = User(name='administrator', _password='administrator')
+        user = User(name='administrator', password='administrator')
         db.session.add(user)
         db.session.commit()
         flash('新規作成しました')
     else:
         flash('')
-    return redirect(url_for('show'))
+    return redirect(url_for('auth'))
