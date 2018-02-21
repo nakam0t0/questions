@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-DEBUG = True
+DEBUG = False
 SQLALCHEMY_DATABASE_URI = 'sqlite:///questions.db'
 SECRET_KEY = 'secret key'
 SQLALCHEMY_TRACK_MODIFICATIONS = True
