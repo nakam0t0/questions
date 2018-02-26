@@ -102,7 +102,7 @@ def show():
 @auth_required
 def output():
     # csv書き込みの準備
-    f = open('questions/upload/output.csv', 'w')
+    f = open('/tmp/output.csv', 'w')
     writer = csv.writer(f, lineterminator='\n')
     # csv1行目
     csv_row_name = ['id', 'user_name']
@@ -127,7 +127,7 @@ def output():
 @auth_required
 def download():
     flash('')
-    return send_from_directory(app.config['UPLOAD_FOLDER'], 'output.csv', as_attachment=True)
+    return send_from_directory('/tmp/', 'output.csv', as_attachment=True)
 
 @app.route('/change', methods=['POST'])
 @auth_required
