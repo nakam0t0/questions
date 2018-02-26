@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import random, csv, codecs
 from functools import wraps
 from flask import request, redirect, url_for, render_template, flash, send_from_directory, session
@@ -77,21 +76,6 @@ def answer():
     db.session.commit()
     flash('ご回答ありがとうございました！')
     return redirect(url_for('top'))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():

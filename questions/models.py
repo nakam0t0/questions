@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from questions import app, db
 
 # データベースに関する定義

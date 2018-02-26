@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 DEBUG = False
 SQLALCHEMY_DATABASE_URI = 'sqlite:///questions.db'
-SECRET_KEY = 'secret key'
-SQLALCHEMY_TRACK_MODIFICATIONS = True
+SECRET_KEY = '<secret key>'
 UPLOAD_FOLDER = 'upload/'
 # 分岐の数
 BRANCH_NUMBER = 1
