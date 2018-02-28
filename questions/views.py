@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import random, csv, codecs
 from functools import wraps
 from flask import request, redirect, url_for, render_template, flash, send_from_directory, session
@@ -101,25 +102,42 @@ def show():
 @app.route('/output', methods=['POST'])
 @auth_required
 def output():
-    # csv書き込みの準備
-    f = open('/tmp/output.csv', 'w')
-    writer = csv.writer(f, lineterminator='\n')
-    # csv1行目
-    csv_row_name = ['id', 'user_name']
-    for i in range(app.config['BRANCH_NUMBER']):
-        csv_row_name.append('branch' + str(i))
-    for i in range(app.config['QUESTION_NUMBER']):
-        csv_row_name.append('question' + str(i))
-    writer.writerow(csv_row_name)
-    # csvにデータベースから書き出す
-    for answer in Answer.query.all():
-        csv_row = [answer.id, answer.user_name]
+#     # csv書き込みの準備
+#     f = open('/tmp/output.csv', 'w')
+#     writer = csv.writer(f, lineterminator='\n')
+#     # csv1行目
+#     csv_row_name = ['id', 'user_name']
+#     for i in range(app.config['BRANCH_NUMBER']):
+#         csv_row_name.append('branch' + str(i))
+#     for i in range(app.config['QUESTION_NUMBER']):
+#         csv_row_name.append('question' + str(i))
+#     writer.writerow(csv_row_name)
+#     # csvにデータベースから書き出す
+#     for answer in Answer.query.all():
+#         csv_row = [answer.id, answer.user_name]
+#         for i in range(app.config['BRANCH_NUMBER']):
+#             exec('csv_row.append(answer.branch%d)' % (i))
+#         for i in range(app.config['QUESTION_NUMBER']):
+#             exec('csv_row.append(answer.question%d)' % (i))
+#         writer.writerow(csv_row)
+#     f.close()
+    with codecs.open("/tmp/output.csv", "w", "utf-8") as file:
+        writer = csv.writer(file, lineterminator='\n')
+        # csv1行目
+        csv_row_name = ['id', 'user_name']
         for i in range(app.config['BRANCH_NUMBER']):
-            exec('csv_row.append(answer.branch%d)' % (i))
+            csv_row_name.append('branch' + str(i))
         for i in range(app.config['QUESTION_NUMBER']):
-            exec('csv_row.append(answer.question%d)' % (i))
-        writer.writerow(csv_row)
-    f.close()
+            csv_row_name.append('question' + str(i))
+        writer.writerow(csv_row_name)
+        # csvにデータベースから書き出す
+        for answer in Answer.query.all():
+            csv_row = [answer.id, answer.user_name]
+            for i in range(app.config['BRANCH_NUMBER']):
+                exec('csv_row.append(answer.branch%d)' % (i))
+            for i in range(app.config['QUESTION_NUMBER']):
+                exec('csv_row.append(answer.question%d)' % (i))
+            writer.writerow(csv_row)
     flash('更新しました')
     return redirect(url_for('show'))
 
