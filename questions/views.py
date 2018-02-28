@@ -126,7 +126,6 @@ def output():
 @app.route('/download', methods=['POST'])
 @auth_required
 def download():
-    flash('')
     return send_from_directory('/tmp/', 'output.csv', as_attachment=True)
 
 @app.route('/change', methods=['POST'])
@@ -159,6 +158,4 @@ def destroy():
         db.session.add(user)
         db.session.commit()
         flash('新規作成しました')
-    else:
-        flash('')
     return redirect(url_for('auth'))
