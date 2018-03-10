@@ -1,364 +1,363 @@
 {% extends "layout.html" %}
 {% block body %}
-<form id="answer" action={{ url_for('answer') }} method=post class=answer>
-    <h5 class="question"><span class="badge-custom">　1　</span>  あなたの性別を教えてください。</h5>
-    <div class="custom-control custom-radio custom-control-inline">
+<div id="content">
+  <div class="jumbotron">
+    <div class="container">
+      <h2>{{ header }}</h2>
+    </div>
+  </div>
+
+  <div class="container">
+    {% for message in get_flashed_messages() %}
+      <div class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <form id="answer" action={{ url_for('answer') }} method=post class=answer>
+      <h5 class="question"><span class="badge-custom">　1　</span>  あなたの性別を教えてください。</h5>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q0-0" class="custom-control-input" name=q0 value="1" required>
         <label class="custom-control-label" for="q0-0" form="answer">男性</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q0-1" class="custom-control-input" name=q0 value="2" required>
         <label class="custom-control-label" for="q0-1" form="answer">女性</label>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+      </div>
+      <br><br><br><br>
 
-
-    <h5 class="question"><span class="badge-custom">　2　</span>  あなたの年齢を教えてください。</h5>
-    <div class="custom-control custom-radio custom-control-inline">
+      <h5 class="question"><span class="badge-custom">　2　</span>  あなたの年齢を教えてください。</h5>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q1-0" class="custom-control-input" name=q1 value="1" required>
         <label class="custom-control-label" for="q1-0" form="answer">20〜29歳</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q1-1" class="custom-control-input" name=q1 value="2" required>
         <label class="custom-control-label" for="q1-1" form="answer">30〜39歳</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q1-2" class="custom-control-input" name=q1 value="3" required>
         <label class="custom-control-label" for="q1-2" form="answer">40〜49歳</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q1-3" class="custom-control-input" name=q1 value="4" required>
         <label class="custom-control-label" for="q1-3" form="answer">50〜59歳</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q1-4" class="custom-control-input"  name=q1 value="5" required>
         <label class="custom-control-label" for="q1-4" form="answer">60〜69歳</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q1-5" class="custom-control-input" name=q1 value="6" required>
         <label class="custom-control-label" for="q1-5" form="answer">70歳以上</label>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+      </div>
+      <br><br><br><br> 
 
-
-    <h5 class="question"><span class="badge-custom">　3　</span>  政治の立場を明らかにするにあたって、世間ではよく「保守」とか「リベラル」とかいいますが、以下の4つのうち、あなたはどれにあてはまりますか。</h5>
-    <div class="custom-control custom-radio custom-control-inline">
+      <h5 class="question"><span class="badge-custom">　3　</span>  政治の立場を明らかにするにあたって、世間ではよく「保守」とか「リベラル」とかいいますが、以下の4つのうち、あなたはどれにあてはまりますか。</h5>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q2-0" class="custom-control-input" name=q2 value="1" required>
         <label class="custom-control-label" for="q2-0" form="answer">保守</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q2-1" class="custom-control-input" name=q2 value="2" required>
         <label class="custom-control-label" for="q2-1" form="answer">やや保守</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q2-2" class="custom-control-input" name=q2 value="3" required>
         <label class="custom-control-label" for="q2-2" form="answer">リベラル</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q2-3" class="custom-control-input" name=q2 value="4" required>
         <label class="custom-control-label" for="q2-3" form="answer">ややリベラル</label>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+      </div>
+      <br><br><br><br>
 
-    <h5 class="question"><span class="badge-custom">　4　</span>  以下の質問について、あなたの考えに最も近いものを一つずつお答えください</h5>
-    <table class="table">
+      <h5 class="question"><span class="badge-custom">　4　</span>  以下の質問について、あなたの考えに最も近いものを一つずつお答えください</h5>
+      <table class="table">
         <tr>
-            <th></th>
-            <th>まったくあてはまらない</th>
-            <th>ややあてはまらない</th>
-            <th>どちらでもない</th>
-            <th>ややあてはまる</th>
-            <th>とてもあてはまる</th>
+          <th></th>
+          <th>まったくあてはまらない</th>
+          <th>ややあてはまらない</th>
+          <th>どちらでもない</th>
+          <th>ややあてはまる</th>
+          <th>とてもあてはまる</th>
         </tr>
         <tr>
-            <th>現在の国の政治の動向について関心が高い</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q3-0" class="custom-control-input" name=q3 value="1" required><label class="custom-control-label" for="q3-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q3-1" class="custom-control-input" name=q3 value="2" required><label class="custom-control-label" for="q3-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q3-2" class="custom-control-input" name=q3 value="3" required><label class="custom-control-label" for="q3-2" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q3-3" class="custom-control-input" name=q3 value="4" required><label class="custom-control-label" for="q3-3" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q3-4" class="custom-control-input" name=q3 value="5" required><label class="custom-control-label" for="q3-4" form="answer"></label></div></td>
+          <th>現在の国の政治の動向について関心が高い</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q3-0" class="custom-control-input" name=q3 value="1" required><label class="custom-control-label" for="q3-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q3-1" class="custom-control-input" name=q3 value="2" required><label class="custom-control-label" for="q3-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q3-2" class="custom-control-input" name=q3 value="3" required><label class="custom-control-label" for="q3-2" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q3-3" class="custom-control-input" name=q3 value="4" required><label class="custom-control-label" for="q3-3" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q3-4" class="custom-control-input" name=q3 value="5" required><label class="custom-control-label" for="q3-4" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>できるだけテレビやラジオの政治ニュースを見たり聞いたりするよう心がけている</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q4-0" class="custom-control-input" name=q4 value="1" required><label class="custom-control-label" for="q4-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q4-1" class="custom-control-input" name=q4 value="2" required><label class="custom-control-label" for="q4-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q4-2" class="custom-control-input" name=q4 value="3" required><label class="custom-control-label" for="q4-2" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q4-3" class="custom-control-input" name=q4 value="4" required><label class="custom-control-label" for="q4-3" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q4-4" class="custom-control-input" name=q4 value="5" required><label class="custom-control-label" for="q4-4" form="answer"></label></div></td>
+          <th>できるだけテレビやラジオの政治ニュースを見たり聞いたりするよう心がけている</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q4-0" class="custom-control-input" name=q4 value="1" required><label class="custom-control-label" for="q4-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q4-1" class="custom-control-input" name=q4 value="2" required><label class="custom-control-label" for="q4-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q4-2" class="custom-control-input" name=q4 value="3" required><label class="custom-control-label" for="q4-2" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q4-3" class="custom-control-input" name=q4 value="4" required><label class="custom-control-label" for="q4-3" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q4-4" class="custom-control-input" name=q4 value="5" required><label class="custom-control-label" for="q4-4" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>政治的な問題には関わりを持たないようにしている</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q5-0" class="custom-control-input" name=q5 value="1" required><label class="custom-control-label" for="q5-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q5-1" class="custom-control-input" name=q5 value="2" required><label class="custom-control-label" for="q5-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q5-2" class="custom-control-input" name=q5 value="3" required><label class="custom-control-label" for="q5-2" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q5-3" class="custom-control-input" name=q5 value="4" required><label class="custom-control-label" for="q5-3" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q5-4" class="custom-control-input" name=q5 value="5" required><label class="custom-control-label" for="q5-4" form="answer"></label></div></td>
+          <th>政治的な問題には関わりを持たないようにしている</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q5-0" class="custom-control-input" name=q5 value="1" required><label class="custom-control-label" for="q5-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q5-1" class="custom-control-input" name=q5 value="2" required><label class="custom-control-label" for="q5-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q5-2" class="custom-control-input" name=q5 value="3" required><label class="custom-control-label" for="q5-2" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q5-3" class="custom-control-input" name=q5 value="4" required><label class="custom-control-label" for="q5-3" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q5-4" class="custom-control-input" name=q5 value="5" required><label class="custom-control-label" for="q5-4" form="answer"></label></div></td>
         </tr>
-    </table>
-    <br> <br> <br> <br> <br> <br> <br> <br>
+      </table>
+      <br> <br> <br> <br> <br> <br> <br> <br>
 
-    <p>以下の記事は、神奈川新聞の記事「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」の一部です。この記事はインターネット上で配信され、配信先のニュース掲示板で閲覧者のコメントを読むこともできました．これをふまえて、まず下記の記事をよく読んでください．</span><br><br>「川崎市の福田紀彦市長は６日の定例会見で、ヘイトスピーチ規制を含め人権を幅広く擁護する条例を制定する考えを改めて表明した。市はヘイトスピーチが行われる恐れがある場合、公的施設の利用を事前規制するガイドラインを今秋に策定することを決めており、「ガイドラインの次は条例という考えで研究を進めている」と述べた。<br>　在日コリアンの集住地区である川崎区桜本をはじめ同区内で１３回のヘイトデモが繰り返されてきた市は、市人権施策推進協議会の提言を受けて２月から調査研究に着手。同市長は「条例や法律を作らなければいけないこと自体悲しいことだが、被害者がいて実害が出ている。必要最小限で規制していく考えは当初から変わっていない」と話した。<br>　規制を巡っては、ヘイトスピーチは憲法が保障する表現の自由を逸脱した人権侵害と断じ、桜本でのデモを禁じた昨年６月の横浜地裁川崎支部の仮処分を踏まえ、「司法判断を尊重する。国の考えやヘイトスピーチ解消法が示す通り、ヘイトスピーチは許されないというのが大前提。そこに議論の余地はない」と明言した。」（カナロコ｜神奈川新聞ニュース､http://www.kanaloco.jp/article/256100 2017.6.07公開）</p>
+      <p>以下の記事は、神奈川新聞の記事「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」の一部です。この記事はインターネット上で配信され、配信先のニュース掲示板で閲覧者のコメントを読むこともできました．これをふまえて、まず下記の記事をよく読んでください．</span><br><br>「川崎市の福田紀彦市長は６日の定例会見で、ヘイトスピーチ規制を含め人権を幅広く擁護する条例を制定する考えを改めて表明した。市はヘイトスピーチが行われる恐れがある場合、公的施設の利用を事前規制するガイドラインを今秋に策定することを決めており、「ガイドラインの次は条例という考えで研究を進めている」と述べた。<br>　在日コリアンの集住地区である川崎区桜本をはじめ同区内で１３回のヘイトデモが繰り返されてきた市は、市人権施策推進協議会の提言を受けて２月から調査研究に着手。同市長は「条例や法律を作らなければいけないこと自体悲しいことだが、被害者がいて実害が出ている。必要最小限で規制していく考えは当初から変わっていない」と話した。<br>　規制を巡っては、ヘイトスピーチは憲法が保障する表現の自由を逸脱した人権侵害と断じ、桜本でのデモを禁じた昨年６月の横浜地裁川崎支部の仮処分を踏まえ、「司法判断を尊重する。国の考えやヘイトスピーチ解消法が示す通り、ヘイトスピーチは許されないというのが大前提。そこに議論の余地はない」と明言した。」（カナロコ｜神奈川新聞ニュース､http://www.kanaloco.jp/article/256100 2017.6.07公開）</p>
 
-    <br> <br> <br> <br>
+      <br> <br> <br> <br>
 
-    <h5 class="question"><span class="badge-custom">　5　</span>  以下の画面は、先ほどの「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」に対するニュース掲示板のコメントの一部となります。<span style="color: #ff0000;">まず、この掲示板のコメントを一つずつ読んでください。あわせてコメントの右下にある「いいね」、「よくないね」の評価数も確認してください。</span>その上で次の質問に進んでください。<br></h5>
+      <h5 class="question"><span class="badge-custom">　5　</span>  以下の画面は、先ほどの「〈時代の正体〉「人権擁護へ条例制定」　川崎市長改めて表明」に対するニュース掲示板のコメントの一部となります。<span style="color: #ff0000;">まず、この掲示板のコメントを一つずつ読んでください。あわせてコメントの右下にある「いいね」、「よくないね」の評価数も確認してください。</span>その上で次の質問に進んでください。<br></h5>
 
-    {% if user.branch0 == 'A' %}
-    <img src="/static/images/ImageA.png">
-    {% else %}
-    <img src="/static/images/ImageB.png">
-    {% endif %}
+      {% if user.branch0 == 'A' %}
+        <img src="/static/images/ImageA.png">
+      {% else %}
+        <img src="/static/images/ImageB.png">
+      {% endif %}
 
-    <p>このニュース掲示板の各コメントに対して、もしあなたがリアクションをするとしたら、どんなリアクションをしますか。<span style="color: #ff0000;">掲示板の画面に戻ってコメント内容を一つずつ確認しながらお答えください。</span></p>
-    <table class="table">
+      <p>このニュース掲示板の各コメントに対して、もしあなたがリアクションをするとしたら、どんなリアクションをしますか。<span style="color: #ff0000;">掲示板の画面に戻ってコメント内容を一つずつ確認しながらお答えください。</span></p>
+      <table class="table">
         <tr>
-            <th></th>
-            <td>いいね</td>
-            <td>よくないね</td>
+          <th></th>
+          <td>いいね</td>
+          <td>よくないね</td>
         </tr>
         <tr>
-            <th>ユーザー1のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q6-0" class="custom-control-input" name=q6 value="1" required><label class="custom-control-label" for="q6-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q6-1" class="custom-control-input" name=q6 value="2" required><label class="custom-control-label" for="q6-1" form="answer"></label></div></td>
+          <th>ユーザー1のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q6-0" class="custom-control-input" name=q6 value="1" required><label class="custom-control-label" for="q6-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q6-1" class="custom-control-input" name=q6 value="2" required><label class="custom-control-label" for="q6-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー2のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q7-0" class="custom-control-input" name=q7 value="1" required><label class="custom-control-label" for="q7-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q7-1" class="custom-control-input" name=q7 value="2" required><label class="custom-control-label" for="q7-1" form="answer"></label></div></td>
+          <th>ユーザー2のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q7-0" class="custom-control-input" name=q7 value="1" required><label class="custom-control-label" for="q7-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q7-1" class="custom-control-input" name=q7 value="2" required><label class="custom-control-label" for="q7-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー3のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q8-0" class="custom-control-input" name=q8 value="1" required><label class="custom-control-label" for="q8-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q8-1" class="custom-control-input" name=q8 value="2" required><label class="custom-control-label" for="q8-1" form="answer"></label></div></td>
+          <th>ユーザー3のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q8-0" class="custom-control-input" name=q8 value="1" required><label class="custom-control-label" for="q8-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q8-1" class="custom-control-input" name=q8 value="2" required><label class="custom-control-label" for="q8-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー4のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q9-0" class="custom-control-input" name=q9 value="1" required><label class="custom-control-label" for="q9-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q9-1" class="custom-control-input" name=q9 value="2" required><label class="custom-control-label" for="q9-1" form="answer"></label></div></td>
+          <th>ユーザー4のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q9-0" class="custom-control-input" name=q9 value="1" required><label class="custom-control-label" for="q9-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q9-1" class="custom-control-input" name=q9 value="2" required><label class="custom-control-label" for="q9-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー5のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q10-0" class="custom-control-input" name=q10 value="1" required><label class="custom-control-label" for="q10-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q10-1" class="custom-control-input" name=q10 value="2" required><label class="custom-control-label" for="q10-1" form="answer"></label></div></td>
+          <th>ユーザー5のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q10-0" class="custom-control-input" name=q10 value="1" required><label class="custom-control-label" for="q10-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q10-1" class="custom-control-input" name=q10 value="2" required><label class="custom-control-label" for="q10-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー6のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q11-0" class="custom-control-input" name=q11 value="1" required><label class="custom-control-label" for="q11-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q11-1" class="custom-control-input" name=q11 value="2" required><label class="custom-control-label" for="q11-1" form="answer"></label></div></td>
+          <th>ユーザー6のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q11-0" class="custom-control-input" name=q11 value="1" required><label class="custom-control-label" for="q11-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q11-1" class="custom-control-input" name=q11 value="2" required><label class="custom-control-label" for="q11-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー7のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q12-0" class="custom-control-input" name=q12 value="1" required><label class="custom-control-label" for="q12-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q12-1" class="custom-control-input" name=q12 value="2" required><label class="custom-control-label" for="q12-1" form="answer"></label></div></td>
+          <th>ユーザー7のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q12-0" class="custom-control-input" name=q12 value="1" required><label class="custom-control-label" for="q12-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q12-1" class="custom-control-input" name=q12 value="2" required><label class="custom-control-label" for="q12-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー8のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q13-0" class="custom-control-input" name=q13 value="1" required><label class="custom-control-label" for="q13-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q13-1" class="custom-control-input" name=q13 value="2" required><label class="custom-control-label" for="q13-1" form="answer"></label></div></td>
+          <th>ユーザー8のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q13-0" class="custom-control-input" name=q13 value="1" required><label class="custom-control-label" for="q13-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q13-1" class="custom-control-input" name=q13 value="2" required><label class="custom-control-label" for="q13-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー9のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q14-0" class="custom-control-input" name=q14 value="1" required><label class="custom-control-label" for="q14-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q14-1" class="custom-control-input" name=q14 value="2" required><label class="custom-control-label" for="q14-1" form="answer"></label></div></td>
+          <th>ユーザー9のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q14-0" class="custom-control-input" name=q14 value="1" required><label class="custom-control-label" for="q14-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q14-1" class="custom-control-input" name=q14 value="2" required><label class="custom-control-label" for="q14-1" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー10のコメント</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q15-0" class="custom-control-input" name=q15 value="1" required><label class="custom-control-label" for="q15-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q15-1" class="custom-control-input" name=q15 value="2" required><label class="custom-control-label" for="q15-1" form="answer"></label></div></td>
+          <th>ユーザー10のコメント</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q15-0" class="custom-control-input" name=q15 value="1" required><label class="custom-control-label" for="q15-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q15-1" class="custom-control-input" name=q15 value="2" required><label class="custom-control-label" for="q15-1" form="answer"></label></div></td>
         </tr>
-    </table>
-    <br>
-    <br>
-    <br>
-    <br>
+      </table>
+      <br><br><br><br>
 
-    <h5 class="question"><span class="badge-custom">　6　</span>  このニュース掲示板には、特定のユーザーのコメントを優先的に表示できる/一切表示させなくする機能があります。それぞれのユーザに対してあなたはどのような選択をしますか。<span style="color: #ff0000;">掲示板の画面に戻ってコメント内容を一つずつ確認しながらお答えください。</span></h5>
-    <table class="table">
+      <h5 class="question"><span class="badge-custom">　6　</span>  このニュース掲示板には、特定のユーザーのコメントを優先的に表示できる/一切表示させなくする機能があります。それぞれのユーザに対してあなたはどのような選択をしますか。<span style="color: #ff0000;">掲示板の画面に戻ってコメント内容を一つずつ確認しながらお答えください。</span></h5>
+      <table class="table">
         <tr>
-            <th></th>
-            <td>このユーザのコメントを優先表示させる</td>
-            <td>このユーザのコメントを一切表示させない</td>
-            <td>そのまま</td>
+          <th></th>
+          <td>このユーザのコメントを優先表示させる</td>
+          <td>このユーザのコメントを一切表示させない</td>
+          <td>そのまま</td>
         </tr>
         <tr>
-            <th>ユーザー1</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q16-0" class="custom-control-input" name=q16 value="1" required><label class="custom-control-label" for="q16-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q16-1" class="custom-control-input" name=q16 value="2" required><label class="custom-control-label" for="q16-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q16-2" class="custom-control-input" name=q16 value="3" required><label class="custom-control-label" for="q16-2" form="answer"></label></div></td>
+          <th>ユーザー1</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q16-0" class="custom-control-input" name=q16 value="1" required><label class="custom-control-label" for="q16-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q16-1" class="custom-control-input" name=q16 value="2" required><label class="custom-control-label" for="q16-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q16-2" class="custom-control-input" name=q16 value="3" required><label class="custom-control-label" for="q16-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー2</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q17-0" class="custom-control-input" name=q17 value="1" required><label class="custom-control-label" for="q17-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q17-1" class="custom-control-input" name=q17 value="2" required><label class="custom-control-label" for="q17-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q17-2" class="custom-control-input" name=q17 value="3" required><label class="custom-control-label" for="q17-2" form="answer"></label></div></td>
+          <th>ユーザー2</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q17-0" class="custom-control-input" name=q17 value="1" required><label class="custom-control-label" for="q17-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q17-1" class="custom-control-input" name=q17 value="2" required><label class="custom-control-label" for="q17-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q17-2" class="custom-control-input" name=q17 value="3" required><label class="custom-control-label" for="q17-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー3</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q18-0" class="custom-control-input" name=q18 value="1" required><label class="custom-control-label" for="q18-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q18-1" class="custom-control-input" name=q18 value="2" required><label class="custom-control-label" for="q18-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q18-2" class="custom-control-input" name=q18 value="3" required><label class="custom-control-label" for="q18-2" form="answer"></label></div></td>
+          <th>ユーザー3</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q18-0" class="custom-control-input" name=q18 value="1" required><label class="custom-control-label" for="q18-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q18-1" class="custom-control-input" name=q18 value="2" required><label class="custom-control-label" for="q18-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q18-2" class="custom-control-input" name=q18 value="3" required><label class="custom-control-label" for="q18-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー4</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q19-0" class="custom-control-input" name=q19 value="1" required><label class="custom-control-label" for="q19-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q19-1" class="custom-control-input" name=q19 value="2" required><label class="custom-control-label" for="q19-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q19-2" class="custom-control-input" name=q19 value="3" required><label class="custom-control-label" for="q19-2" form="answer"></label></div></td>
+          <th>ユーザー4</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q19-0" class="custom-control-input" name=q19 value="1" required><label class="custom-control-label" for="q19-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q19-1" class="custom-control-input" name=q19 value="2" required><label class="custom-control-label" for="q19-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q19-2" class="custom-control-input" name=q19 value="3" required><label class="custom-control-label" for="q19-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー5</th>
+          <th>ユーザー5</th>
             <td><div class="custom-control custom-radio"><input type=radio id="q20-0" class="custom-control-input" name=q20 value="1" required><label class="custom-control-label" for="q20-0" form="answer"></label></div></td>
             <td><div class="custom-control custom-radio"><input type=radio id="q20-1" class="custom-control-input" name=q20 value="2" required><label class="custom-control-label" for="q20-1" form="answer"></label></div></td>
             <td><div class="custom-control custom-radio"><input type=radio id="q20-2" class="custom-control-input" name=q20 value="3" required><label class="custom-control-label" for="q20-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー6</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q21-0" class="custom-control-input" name=q21 value="1" required><label class="custom-control-label" for="q21-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q21-1" class="custom-control-input" name=q21 value="2" required><label class="custom-control-label" for="q21-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q21-2" class="custom-control-input" name=q21 value="3" required><label class="custom-control-label" for="q21-2" form="answer"></label></div></td>
+          <th>ユーザー6</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q21-0" class="custom-control-input" name=q21 value="1" required><label class="custom-control-label" for="q21-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q21-1" class="custom-control-input" name=q21 value="2" required><label class="custom-control-label" for="q21-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q21-2" class="custom-control-input" name=q21 value="3" required><label class="custom-control-label" for="q21-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー7</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q22-0" class="custom-control-input" name=q22 value="1" required><label class="custom-control-label" for="q22-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q22-1" class="custom-control-input" name=q22 value="2" required><label class="custom-control-label" for="q22-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q22-2" class="custom-control-input" name=q22 value="3" required><label class="custom-control-label" for="q22-2" form="answer"></label></div></td>
+          <th>ユーザー7</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q22-0" class="custom-control-input" name=q22 value="1" required><label class="custom-control-label" for="q22-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q22-1" class="custom-control-input" name=q22 value="2" required><label class="custom-control-label" for="q22-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q22-2" class="custom-control-input" name=q22 value="3" required><label class="custom-control-label" for="q22-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー8</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q23-0" class="custom-control-input" name=q23 value="1" required><label class="custom-control-label" for="q23-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q23-1" class="custom-control-input" name=q23 value="2" required><label class="custom-control-label" for="q23-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q23-2" class="custom-control-input" name=q23 value="3" required><label class="custom-control-label" for="q23-2" form="answer"></label></div></td>
+          <th>ユーザー8</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q23-0" class="custom-control-input" name=q23 value="1" required><label class="custom-control-label" for="q23-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q23-1" class="custom-control-input" name=q23 value="2" required><label class="custom-control-label" for="q23-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q23-2" class="custom-control-input" name=q23 value="3" required><label class="custom-control-label" for="q23-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー9</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q24-0" class="custom-control-input" name=q24 value="1" required><label class="custom-control-label" for="q24-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q24-1" class="custom-control-input" name=q24 value="2" required><label class="custom-control-label" for="q24-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q24-2" class="custom-control-input" name=q24 value="3" required><label class="custom-control-label" for="q24-2" form="answer"></label></div></td>
+          <th>ユーザー9</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q24-0" class="custom-control-input" name=q24 value="1" required><label class="custom-control-label" for="q24-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q24-1" class="custom-control-input" name=q24 value="2" required><label class="custom-control-label" for="q24-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q24-2" class="custom-control-input" name=q24 value="3" required><label class="custom-control-label" for="q24-2" form="answer"></label></div></td>
         </tr>
         <tr>
-            <th>ユーザー10</th>
-            <td><div class="custom-control custom-radio"><input type=radio id="q25-0" class="custom-control-input" name=q25 value="1" required><label class="custom-control-label" for="q25-0" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q25-1" class="custom-control-input" name=q25 value="2" required><label class="custom-control-label" for="q25-1" form="answer"></label></div></td>
-            <td><div class="custom-control custom-radio"><input type=radio id="q25-2" class="custom-control-input" name=q25 value="3" required><label class="custom-control-label" for="q25-2" form="answer"></label></div></td>
+          <th>ユーザー10</th>
+          <td><div class="custom-control custom-radio"><input type=radio id="q25-0" class="custom-control-input" name=q25 value="1" required><label class="custom-control-label" for="q25-0" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q25-1" class="custom-control-input" name=q25 value="2" required><label class="custom-control-label" for="q25-1" form="answer"></label></div></td>
+          <td><div class="custom-control custom-radio"><input type=radio id="q25-2" class="custom-control-input" name=q25 value="3" required><label class="custom-control-label" for="q25-2" form="answer"></label></div></td>
         </tr>
-    </table>
-    <br>
-    <br>
-    <br>
-    <br>
+      </table>
+      <br><br><br><br>
 
-    <h5 class="question"><span class="badge-custom">　7　</span>  もしあなたがこのニュース掲示板にコメントするとしたら、どのような内容を書き込みますか。</h5>
-    あなたのコメント：　　<input type="text" name=q26>
-    <br> <br> <br> <br>
+      <h5 class="question"><span class="badge-custom">　7　</span>  もしあなたがこのニュース掲示板にコメントするとしたら、どのような内容を書き込みますか。</h5>
+      あなたのコメント：　　<input type="text" name=q26>
+      <br> <br> <br> <br>
 
-    <h5 class="question"><span class="badge-custom">　8　</span>  あなたの仕事は、大きく分けて、この中のどれにあたりますか。</h5>
-    <div class="custom-control custom-radio custom-control-inline">
+      <h5 class="question"><span class="badge-custom">　8　</span>  あなたの仕事は、大きく分けて、この中のどれにあたりますか。</h5>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q27-0" class="custom-control-input"  name=q27 value="1" required>
         <label class="custom-control-label" for="q27-0" form="answer">経営者・役員</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q27-1" class="custom-control-input"  name=q27 value="2" required>
         <label class="custom-control-label" for="q27-1" form="answer">正社員</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q27-2" class="custom-control-input"  name=q27 value="3" required>
         <label class="custom-control-label" for="q27-2" form="answer">非正規社員（契約・派遣・嘱託・パート・アルバイトなど）</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q27-3" class="custom-control-input"  name=q27 value="4" required>
         <label class="custom-control-label" for="q27-3" form="answer">自営業者（農林水産業者含む）</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q27-4" class="custom-control-input"  name=q27 value="5" required>
         <label class="custom-control-label" for="q27-4" form="answer">学生・無職（主婦含む）</label>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+      </div>
+      <br><br><br><br>
 
-    <h5 class="question"><span class="badge-custom">　9　</span>  あなたが、最後にいらっしゃった学校は、つぎのどれに当たりますか。<br>（在学中の方はその学校をお答えください。）</h5>
-    <div class="custom-control custom-radio custom-control-inline">
+      <h5 class="question"><span class="badge-custom">　9　</span>  あなたが、最後にいらっしゃった学校は、つぎのどれに当たりますか。<br>（在学中の方はその学校をお答えください。）</h5>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q28-0" class="custom-control-input" name=q28 value="1" required>
         <label class="custom-control-label" for="q28-0" form="answer">中学校</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q28-1" class="custom-control-input" name=q28 value="2" required>
         <label class="custom-control-label" for="q28-1" form="answer">高等学校</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q28-2" class="custom-control-input" name=q28 value="3" required>
         <label class="custom-control-label" for="q28-2" form="answer">専門学校</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q28-3" class="custom-control-input" name=q28 value="4" required>
         <label class="custom-control-label" for="q28-3" form="answer">短期大学・高等専門学校</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q28-4" class="custom-control-input" name=q28 value="5" required>
         <label class="custom-control-label" for="q28-4" form="answer">大学</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q28-5" class="custom-control-input" name=q28 value="6" required>
         <label class="custom-control-label" for="q28-5" form="answer">大学院</label>
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
+      </div>
+      <br><br><br><br>
 
-    <h5 class="question"><span class="badge-custom">　10　</span>  かりに現在の日本の社会全体を、このリストにかいてあるように1から10までの10の層に分けるとすれば、あなた自身は、このどれに入ると思いますか。（「1」がもっとも上、「10」がもっとも下）</h5>
-    <div class="custom-control custom-radio custom-control-inline">
+      <h5 class="question"><span class="badge-custom">　10　</span>  かりに現在の日本の社会全体を、このリストにかいてあるように1から10までの10の層に分けるとすれば、あなた自身は、このどれに入ると思いますか。（「1」がもっとも上、「10」がもっとも下）</h5>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-0" class="custom-control-input" name=q29 value="1" required>
         <label class="custom-control-label" for="q29-0" form="answer">1</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-1" class="custom-control-input" name=q29 value="2" required>
         <label class="custom-control-label" for="q29-1" form="answer">2</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-2" class="custom-control-input" name=q29 value="3" required>
         <label class="custom-control-label" for="q29-2" form="answer">3</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-3" class="custom-control-input" name=q29 value="4" required>
         <label class="custom-control-label" for="q29-3" form="answer">4</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-4" class="custom-control-input" name=q29 value="5" required>
         <label class="custom-control-label" for="q29-4" form="answer">5</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-5" class="custom-control-input" name=q29 value="6" required>
         <label class="custom-control-label" for="q29-5" form="answer">6</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-6" class="custom-control-input" name=q29 value="7" required>
         <label class="custom-control-label" for="q29-6" form="answer">7</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-7" class="custom-control-input" name=q29 value="8" required>
         <label class="custom-control-label" for="q29-7" form="answer">8</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-8" class="custom-control-input" name=q29 value="9" required>
         <label class="custom-control-label" for="q29-8" form="answer">9</label>
-    </div>
-    <div class="custom-control custom-radio custom-control-inline">
+      </div>
+      <div class="custom-control custom-radio custom-control-inline">
         <input type=radio id="q29-9" class="custom-control-input" name=q29 value="10" required>
         <label class="custom-control-label" for="q29-9" form="answer">10</label>
-    </div>
-    <br> <br> <br> <br>
+      </div>
+      <br> <br> <br> <br>
 
-    <button type="submit" class="btn btn-success btn-block">送信</button>
-</form>
+      <button type="submit" class="btn btn-success btn-block">送信</button>
+    </form>
     <br> <br> <br> <br>
+  </div>
+</div>
+
+<div id="footer">
+  <div class="container right">
+    <p>{{ footer }}</p>
+  </div>
+</div>
 {% endblock %}
