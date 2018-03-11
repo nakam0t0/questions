@@ -3,7 +3,7 @@ import random, csv, codecs
 from functools import wraps
 from flask import request, redirect, url_for, render_template, flash, send_from_directory, session
 from questions import app, db
-from questions.models import Answer, User
+from questions.models import Answer, Administrator
 
 # 回答者ログインしていなければトップページに戻す
 def login_required(f):
@@ -30,12 +30,17 @@ def branchAB():
     else:
         return 'B'
 
+
+'''
+それぞれのURLにアクセスされた時の処理
+アンケート作成において変更が必要な箇所は50, 57, 65, 89行目の回答者への各メッセージ
+'''
+
+
 # トップページ
 @app.route('/')
 def top():
-    header = 'インターネット掲示板についてのアンケート調査'
-    footer = ''
-    return render_template('top.html', header=header, footer=footer)
+    return render_template('top.html')
 
 # ログイン処理
 @app.route('/login', methods=['POST'])
@@ -68,13 +73,11 @@ def logout():
 @app.route('/question')
 @login_required
 def question():
-    header = 'インターネット掲示板についてのアンケート調査'
-    footer = ''
     uname = session.get('user_name')
     user = db.session.query(Answer).filter(Answer.user_name==uname).first()
-    return render_template('question.html', header=header, footer=footer, user=user)
+    return render_template('question.html', user=user)
 
-# 回答記録
+# 回答を記録
 @app.route('/answer', methods=['POST'])
 @login_required
 def answer():
@@ -86,28 +89,31 @@ def answer():
     flash('ご回答ありがとうございました！')
     return redirect(url_for('top'))
 
+
+'''
+以下、管理者用の処理
+アンケート作成においては変更の必要なし
+'''
+
+
 # 管理者用ページトップ（ログイン）
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
-    header = '管理画面 - インターネット掲示板についてのアンケート調査'
-    footer = ''
-    administrator = db.session.query(User).first()
+    administrator = db.session.query(Administrator).first()
     if request.method == 'POST':
         if administrator.name == request.form['name'] and administrator.password == request.form['password']:
             session['administrator'] = True
             return redirect(url_for('show'))
         else:
             flash('管理者名またはパスワードが間違っています')
-    return render_template('auth.html', header=header, footer=footer)
+    return render_template('auth.html')
 
 # 管理ページ
 @app.route('/admin')
 @auth_required
 def show():
     answers = Answer.query.all()
-    header = '管理画面 - インターネット掲示板についてのアンケート調査'
-    footer = ''
-    return render_template('admin.html', answers = answers, header=header, footer=footer)
+    return render_template('admin.html', answers = answers)
 
 # CSV更新（出力）
 @app.route('/output', methods=['POST'])
@@ -145,7 +151,7 @@ def download():
 @auth_required
 def change():
     if request.form.get('_method') == 'PUT':
-        administrator = db.session.query(User).first()
+        administrator = db.session.query(Administrator).first()
         if administrator.password == request.form['old']:
             if request.form['new'] == request.form['confirm']:
                 administrator.password = request.form['new'] 
@@ -167,7 +173,7 @@ def destroy():
     if request.form.get('_method') == 'DELETE':
         db.drop_all()
         db.create_all()
-        user = User(name='administrator', password='administrator')
+        user = Administrator(name='administrator', password='administrator')
         db.session.add(user)
         db.session.commit()
         flash('新規作成しました')

@@ -1,6 +1,6 @@
 from flask_script import Manager
 from questions import app, db
-from questions.models import User
+from questions.models import Administrator
 
 manager = Manager(app)
 
@@ -10,7 +10,7 @@ manager = Manager(app)
 def init_db():
     db.drop_all()
     db.create_all()
-    user = User(name='administrator', password='administrator')
+    user = Administrator(name='administrator', password='administrator')
     db.session.add(user)
     db.session.commit()
 

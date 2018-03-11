@@ -1,172 +1,153 @@
-{% extends "layout.html" %}
-{% block body %}
-<div id="content">
-  <div class="jumbotron">
-    <div class="container">
-      <h2>{{ header }}</h2>
-    </div>
-  </div>
+{% extends "layout_admin.html" %}
 
-  <div class="container">
-    {% for message in get_flashed_messages() %}
-      <div class="alert alert-success" role="alert">
-        {{ message }}
+      {% block content %}
+      
+      <div class="row">
+        <div class="offset-lg-1 col-lg-2">
+          <form action="{{ url_for('output') }}" method=post>
+            <input type=submit class="btn btn-success btn-block" value=csv更新>
+          </form>
+        </div>
+        <div class="col-lg-2">
+          <form action="{{ url_for('download') }}" method=post>
+            <input type=submit class="btn btn-success btn-block" value=csvダウンロード>
+          </form>
+        </div>
+        <div class="col-lg-2">
+          <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#change">
+            パスワード変更
+          </button>
+        </div>
+        <div class="col-lg-2">
+          <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#destroy">
+            データ初期化
+          </button>
+        </div>
+        <div class="col-lg-2">
+          <a class="btn btn-primary btn-block" href="{{ url_for('logout') }}" role="button">ログアウト </a>
+        </div>
+        <br>
       </div>
-    {% endfor %}
-
-    <div class="row">
-      <div class="offset-lg-1 col-lg-2">
-        <form action="{{ url_for('output') }}" method=post>
-          <input type=submit class="btn btn-success btn-block" value=csv更新>
-        </form>
-      </div>
-      <div class="col-lg-2">
-        <form action="{{ url_for('download') }}" method=post>
-          <input type=submit class="btn btn-success btn-block" value=csvダウンロード>
-        </form>
-      </div>
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#change">
-          パスワード変更
-        </button>
-      </div>
-      <div class="col-lg-2">
-        <button type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#destroy">
-          データ初期化
-        </button>
-      </div>
-      <div class="col-lg-2">
-        <a class="btn btn-primary btn-block" href="{{ url_for('logout') }}" role="button">ログアウト </a>
-      </div>
-      <br>
-    </div>
-    <!-- モーダルの設定 -->
-    <div class="modal fade" id="destroy" tabindex="-1" role="dialog" aria-labelledby="destroyLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">本当によろしいですか</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p>この操作は取り消すことができません</p>
-            <p>管理者用パスワードも初期化されます</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-            <form action="{{ url_for('destroy') }}" method=post>
-              <input type="hidden" name="_method" value="DELETE" />
-              <input type=submit class="btn btn-danger btn-block" value=DB削除>
-            </form>
-          </div><!-- /.modal-footer -->
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <!-- モーダルの設定 -->
-    <div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="changeLabel">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">管理者用パスワードの変更</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="offset-lg-2 col-lg-8">
-                <form action="{{ url_for('change') }}" method=post>
-                  <div class="form-group">
-                    <label for="old">現在のパスワード</label>
-                    <input type="password" name="old"  class="form-control" id="old" >
-                  </div>
-                  <div class="form-group">
-                    <label for="new">新しいパスワード</label>
-                    <input type="password" name="new"  class="form-control" id="new" >
-                  </div>
-                  <div class="form-group">
-                    <label for="confirm">新しいパスワード(確認用）</label>
-                    <input type="password" name="confirm"  class="form-control" id="confirm" >
-                  </div>
-                  </dl>
-                  <input type="hidden" name="_method" value="PUT" />
-                  <input type=submit class="btn btn-success btn-block" value=パスワード変更>
-               </form>
+      <!-- モーダルの設定 -->
+      <div class="modal fade" id="destroy" tabindex="-1" role="dialog" aria-labelledby="destroyLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">本当によろしいですか</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>この操作は取り消すことができません</p>
+              <p>管理者用パスワードも初期化されます</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+              <form action="{{ url_for('destroy') }}" method=post>
+                <input type="hidden" name="_method" value="DELETE" />
+                <input type=submit class="btn btn-danger btn-block" value=DB削除>
+              </form>
+            </div><!-- /.modal-footer -->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      
+      <!-- モーダルの設定 -->
+      <div class="modal fade" id="change" tabindex="-1" role="dialog" aria-labelledby="changeLabel">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">管理者用パスワードの変更</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="offset-lg-2 col-lg-8">
+                  <form action="{{ url_for('change') }}" method=post>
+                    <div class="form-group">
+                      <label for="old">現在のパスワード</label>
+                      <input type="password" name="old"  class="form-control" id="old" >
+                    </div>
+                    <div class="form-group">
+                      <label for="new">新しいパスワード</label>
+                      <input type="password" name="new"  class="form-control" id="new" >
+                    </div>
+                    <div class="form-group">
+                      <label for="confirm">新しいパスワード(確認用）</label>
+                      <input type="password" name="confirm"  class="form-control" id="confirm" >
+                    </div>
+                    </dl>
+                    <input type="hidden" name="_method" value="PUT" />
+                    <input type=submit class="btn btn-success btn-block" value=パスワード変更>
+                 </form>
+               </div>
              </div>
            </div>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
-         </div><!-- /.modal-footer -->
-        </div><!-- /.modal-content -->
-      </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
-    <br>
-    <div class="scroll">
-      <table class="table">
-        <tr>
-          <th>ID</th>
-          <th>NAME</th>
-          {% for i in range(config['BRANCH_NUMBER']) %}
-            <td>BRANCH{{ i }}</td>
-          {% endfor %}
-          {% for i in range(config['QUESTION_NUMBER']) %}
-            <td>QUESTION{{ i }}</td>
-          {% endfor %}
-        </tr>
-
-        {% for answer in answers %}
+           <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-dismiss="modal">キャンセル</button>
+           </div><!-- /.modal-footer -->
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      
+      <br>
+      <div class="scroll">
+        <table class="table">
           <tr>
-            <th>{{ answer.id }}</th>
-            <th>{{ answer.user_name }}</th>
-            <td>{{ answer.branch0 }}</td>
-            <td>{{ answer.question0 }}</td>
-            <td>{{ answer.question1 }}</td>
-            <td>{{ answer.question2 }}</td>
-            <td>{{ answer.question3 }}</td>
-            <td>{{ answer.question4 }}</td>
-            <td>{{ answer.question5 }}</td>
-            <td>{{ answer.question6 }}</td>
-            <td>{{ answer.question7 }}</td>
-            <td>{{ answer.question8 }}</td>
-            <td>{{ answer.question9 }}</td>
-            <td>{{ answer.question10 }}</td>
-            <td>{{ answer.question11 }}</td>
-            <td>{{ answer.question12 }}</td>
-            <td>{{ answer.question13 }}</td>
-            <td>{{ answer.question14 }}</td>
-            <td>{{ answer.question15 }}</td>
-            <td>{{ answer.question16 }}</td>
-            <td>{{ answer.question17 }}</td>
-            <td>{{ answer.question18 }}</td>
-            <td>{{ answer.question19 }}</td>
-            <td>{{ answer.question20 }}</td>
-            <td>{{ answer.question21 }}</td>
-            <td>{{ answer.question22 }}</td>
-            <td>{{ answer.question23 }}</td>
-            <td>{{ answer.question24 }}</td>
-            <td>{{ answer.question25 }}</td>
-            <td>{{ answer.question26 }}</td>
-            <td>{{ answer.question27 }}</td>
-            <td>{{ answer.question28 }}</td>
-            <td>{{ answer.question29 }}</td>
-            <td>{{ answer.question30 }}</td>
+            <th>ID</th>
+            <th>NAME</th>
+            {% for i in range(config['BRANCH_NUMBER']) %}
+              <td>BRANCH{{ i }}</td>
+            {% endfor %}
+            {% for i in range(config['QUESTION_NUMBER']) %}
+              <td>QUESTION{{ i }}</td>
+            {% endfor %}
           </tr>
-        {% else %}
-          <tr>No Answer</tr>
-        {% endfor %}
-      </table>
-    </div>
-  </div>
-</div>
-
-<div id="footer">
-  <div class="container right">
-    <p>{{ footer }}</p>
-  </div>
-</div>
-{% endblock %}
+      
+          {% for answer in answers %}
+            <tr>
+              <th>{{ answer.id }}</th>
+              <th>{{ answer.user_name }}</th>
+              <td>{{ answer.branch0 }}</td>
+              <td>{{ answer.question0 }}</td>
+              <td>{{ answer.question1 }}</td>
+              <td>{{ answer.question2 }}</td>
+              <td>{{ answer.question3 }}</td>
+              <td>{{ answer.question4 }}</td>
+              <td>{{ answer.question5 }}</td>
+              <td>{{ answer.question6 }}</td>
+              <td>{{ answer.question7 }}</td>
+              <td>{{ answer.question8 }}</td>
+              <td>{{ answer.question9 }}</td>
+              <td>{{ answer.question10 }}</td>
+              <td>{{ answer.question11 }}</td>
+              <td>{{ answer.question12 }}</td>
+              <td>{{ answer.question13 }}</td>
+              <td>{{ answer.question14 }}</td>
+              <td>{{ answer.question15 }}</td>
+              <td>{{ answer.question16 }}</td>
+              <td>{{ answer.question17 }}</td>
+              <td>{{ answer.question18 }}</td>
+              <td>{{ answer.question19 }}</td>
+              <td>{{ answer.question20 }}</td>
+              <td>{{ answer.question21 }}</td>
+              <td>{{ answer.question22 }}</td>
+              <td>{{ answer.question23 }}</td>
+              <td>{{ answer.question24 }}</td>
+              <td>{{ answer.question25 }}</td>
+              <td>{{ answer.question26 }}</td>
+              <td>{{ answer.question27 }}</td>
+              <td>{{ answer.question28 }}</td>
+              <td>{{ answer.question29 }}</td>
+              <td>{{ answer.question30 }}</td>
+            </tr>
+          {% else %}
+            <tr>No Answer</tr>
+          {% endfor %}
+        </table>
+      </div>
+      
+      {% endblock %}

@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+        {% block body %}
+        
+        <h2>インターネット掲示板についてのアンケート調査 管理者画面</h2>
+      </div>
+    </div>
+        
+    <div class="container">
+      {% for message in get_flashed_messages() %}
+        <div class="alert alert-success" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+
+      {% block content %}
+        <!-- ここに各htmlファイルの内容が表示される -->
+      {% endblock %}
+
+    </div>
+  </div>
+        
+  <div id="footer">
+    <div class="container right">
+      <p>インターネット掲示板についてのアンケート調査</p>
+
+      {% endblock %}

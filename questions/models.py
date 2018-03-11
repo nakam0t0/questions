@@ -23,8 +23,8 @@ class Answer(db.Model):
         exec('question%d = db.Column(db.Text)' % (i))
 
 # 管理者の認証のためのテーブル
-class User(db.Model):
-    __tablename__ = 'users'
+class Administrator(db.Model):
+    __tablename__ = 'administrators'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.Text)
     password = db.Column('password', db.Text)
