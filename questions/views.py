@@ -49,7 +49,10 @@ def login():
     if db.session.query(Answer).filter(Answer.user_name==uname).count():
         flash('おかえりなさい' + uname + 'さん')
     else:
-        answer = Answer(user_name = uname)
+        answer = Answer(
+                user_name = uname,
+                ip = request.remote_addr
+                )
         for i in range(app.config['BRANCH_NUMBER']):
             exec('answer.branch%d = branchAB()' % (i))
         db.session.add(answer)
@@ -86,8 +89,9 @@ def answer():
         exec('answer.question%d = request.form[\'q\' + str(i)] ' % (i))
     db.session.add(answer)
     db.session.commit()
+    session.pop('user_name', None)
     flash('ご回答ありがとうございました！')
-    return redirect(url_for('top'))
+    return render_template('thanks.html')
 
 
 '''
@@ -120,10 +124,10 @@ def show():
 @auth_required
 def output():
     # csv書き込みの準備
-    with codecs.open("/tmp/output.csv", "w", "utf-8") as file:
+    with codecs.open("/tmp/output_utf-8.csv", "w", "utf-8") as file:
         writer = csv.writer(file, lineterminator='\n')
         # csv1行目
-        csv_row_name = ['id', 'user_name']
+        csv_row_name = ['id', 'user_name', 'ip']
         for i in range(app.config['BRANCH_NUMBER']):
             csv_row_name.append('branch' + str(i))
         for i in range(app.config['QUESTION_NUMBER']):
@@ -131,7 +135,24 @@ def output():
         writer.writerow(csv_row_name)
         # csvにデータベースから書き出す
         for answer in Answer.query.all():
-            csv_row = [answer.id, answer.user_name]
+            csv_row = [answer.id, answer.user_name, answer.ip]
+            for i in range(app.config['BRANCH_NUMBER']):
+                exec('csv_row.append(answer.branch%d)' % (i))
+            for i in range(app.config['QUESTION_NUMBER']):
+                exec('csv_row.append(answer.question%d)' % (i))
+            writer.writerow(csv_row)
+    with codecs.open("/tmp/output_shift-jis.csv", "w", "shift-jis") as file:
+        writer = csv.writer(file, lineterminator='\n')
+        # csv1行目
+        csv_row_name = ['id', 'user_name', 'ip']
+        for i in range(app.config['BRANCH_NUMBER']):
+            csv_row_name.append('branch' + str(i))
+        for i in range(app.config['QUESTION_NUMBER']):
+            csv_row_name.append('question' + str(i))
+        writer.writerow(csv_row_name)
+        # csvにデータベースから書き出す
+        for answer in Answer.query.all():
+            csv_row = [answer.id, answer.user_name, answer.ip]
             for i in range(app.config['BRANCH_NUMBER']):
                 exec('csv_row.append(answer.branch%d)' % (i))
             for i in range(app.config['QUESTION_NUMBER']):
@@ -141,10 +162,16 @@ def output():
     return redirect(url_for('show'))
 
 # CSVダウンロード
-@app.route('/download', methods=['POST'])
+@app.route('/download/utf', methods=['POST'])
 @auth_required
-def download():
-    return send_from_directory('/tmp/', 'output.csv', as_attachment=True)
+def download_utf():
+    return send_from_directory('/tmp/', 'output_utf-8.csv', as_attachment=True)
+
+# CSVダウンロード
+@app.route('/download/shift', methods=['POST'])
+@auth_required
+def download_shift():
+    return send_from_directory('/tmp/', 'output_shift-jis.csv', as_attachment=True)
 
 # 管理者用パスワード変更
 @app.route('/change', methods=['POST'])

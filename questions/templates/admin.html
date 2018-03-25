@@ -3,14 +3,19 @@
       {% block content %}
       
       <div class="row">
-        <div class="offset-lg-1 col-lg-2">
+        <div class="col-lg-2">
           <form action="{{ url_for('output') }}" method=post>
             <input type=submit class="btn btn-success btn-block" value=csv更新>
           </form>
         </div>
         <div class="col-lg-2">
-          <form action="{{ url_for('download') }}" method=post>
-            <input type=submit class="btn btn-success btn-block" value=csvダウンロード>
+          <form action="{{ url_for('download_utf') }}" method=post>
+            <input type=submit class="btn btn-success btn-block" value=csv(utf)Download>
+          </form>
+        </div>
+        <div class="col-lg-2">
+          <form action="{{ url_for('download_shift') }}" method=post>
+            <input type=submit class="btn btn-success btn-block" value=csv(shift)Download>
           </form>
         </div>
         <div class="col-lg-2">
@@ -99,6 +104,7 @@
           <tr>
             <th>ID</th>
             <th>NAME</th>
+            <th>IP</th>
             {% for i in range(config['BRANCH_NUMBER']) %}
               <td>BRANCH{{ i }}</td>
             {% endfor %}
@@ -111,6 +117,7 @@
             <tr>
               <th>{{ answer.id }}</th>
               <th>{{ answer.user_name }}</th>
+              <th>{{ answer.ip }}</th>
               <td>{{ answer.branch0 }}</td>
               <td>{{ answer.question0 }}</td>
               <td>{{ answer.question1 }}</td>

@@ -17,6 +17,7 @@ class Answer(db.Model):
     __tablename__ = 'answers'
     id = db.Column(db.Integer, primary_key=True)
     user_name = db.Column(db.Text)
+    ip = db.Column(db.Text)
     for i in range(app.config['BRANCH_NUMBER']):
         exec('branch%d = db.Column(db.Text)' % (i))
     for i in range(app.config['QUESTION_NUMBER']):
